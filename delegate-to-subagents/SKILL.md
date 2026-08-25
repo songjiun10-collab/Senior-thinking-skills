@@ -41,7 +41,7 @@ If you do reach for a coordinator, treat it as a real design decision, not just 
 - Give **the task + interfaces it touches + constraints.** Don't paste a summarized session history — hand over file paths and let the subagent read them itself.
 - Pasted text or a returned summary sits in your context from that point on. Passing a file path is always cheaper.
 - If the target is vague ("fix this up"), narrow it yourself before delegating — a vague brief comes back as a vague result.
-- **Record a baseline right before dispatching** (e.g. `git rev-parse HEAD`). Use this baseline later for diffs and review scope — `HEAD~1` silently picks the wrong range if another commit landed in between.
+- **Record a baseline right before dispatching** (e.g. `git rev-parse HEAD`). Use this baseline later for diffs and review scope — `HEAD~1` silently picks the wrong range if another commit landed in between. `git rev-parse HEAD` alone misses **uncommitted** changes already in the working tree at dispatch time — if there were any, also snapshot `git diff` (and `git diff --cached`) before dispatching, or just commit/stash first so the baseline is clean. Otherwise a later "what changed" diff mixes the subagent's work with whatever was already sitting there.
 - **If the same kind of task recurs, capture the brief once as a reusable template** instead of re-explaining it from scratch each time — and fold in corrections as they come up, so the template actually improves with use instead of staying a stale first draft.
 
 ## Verify what comes back
@@ -68,6 +68,7 @@ If you do reach for a coordinator, treat it as a real design decision, not just 
 ## Give long-running work a name and a status line
 
 - When a delegated agent runs over a longer stretch, don't leave it silent until it finishes — give it a short name and keep a one-line status that updates as it progresses ("Inbox Manager — sent, inbox at zero, 5 drafts parked"). A glanceable roster beats a wall of silence followed by one huge report at the end.
+- **There's no live channel for this** — a dispatched agent returns one final result, not a stream of intermediate updates you can watch. The only way to get a status line that actually updates mid-run is to brief the agent to write its own progress to a file (e.g. `.claude/status/<name>.md`) and glance at that file yourself; there's nothing to "watch" otherwise.
 - This is for genuinely long-running or ongoing delegations, not a two-minute task — for a short dispatch, just wait for the completion signal (see "Common failures" below).
 
 ## Common failures
@@ -79,7 +80,7 @@ If you do reach for a coordinator, treat it as a real design decision, not just 
 
 ## Optional: enforce with a hook
 
-Two of these principles are mechanically catchable — **pasting a long conversation summary verbatim**, and **too many concurrent open dispatches** (2-3 is normal, more than that trips it) — `scripts/check_dispatch_brief.py` detects both right before a Task call (PreToolUse). By default it **only warns, it doesn't block** (a default chosen with the assumption this may get installed into projects that aren't your own). To actually block, add the environment variable `DELEGATE_HOOK_STRICT=1` to the hook command — the script's header comment documents the exact behavior.
+Two of these principles are mechanically catchable — **pasting a long conversation summary verbatim**, and **too many concurrent open dispatches** (2-3 is normal, more than that trips it) — `scripts/check_dispatch_brief.py` detects both right before an Agent call (PreToolUse). By default it **only warns, it doesn't block** (a default chosen with the assumption this may get installed into projects that aren't your own). To actually block, add the environment variable `DELEGATE_HOOK_STRICT=1` to the hook command — the script's header comment documents the exact behavior.
 
 Add to `.claude/settings.json`:
 
@@ -88,7 +89,7 @@ Add to `.claude/settings.json`:
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Task",
+        "matcher": "Agent",
         "hooks": [
           { "type": "command", "command": "python3 .claude/skills/delegate-to-subagents/scripts/check_dispatch_brief.py" }
         ]
@@ -96,7 +97,7 @@ Add to `.claude/settings.json`:
     ],
     "PostToolUse": [
       {
-        "matcher": "Task",
+        "matcher": "Agent",
         "hooks": [
           { "type": "command", "command": "python3 .claude/skills/delegate-to-subagents/scripts/check_dispatch_brief.py" }
         ]
@@ -106,4 +107,6 @@ Add to `.claude/settings.json`:
 }
 ```
 
-Hook the same script into both PreToolUse and PostToolUse — PostToolUse records "this dispatch finished" to keep the overlap count accurate (hook only one side and the count only ever climbs). If your skill is installed at a different path, update the command path to match. By default it only warns quietly (visible only in the human-facing transcript) — to make Claude actually react to it (i.e. actually block), prefix the command with `DELEGATE_HOOK_STRICT=1` (`"command": "DELEGATE_HOOK_STRICT=1 python3 ..."`). This hook is example-level enforcement — not a red-team-tested CRITICAL-tier block like Hncs's `protect_never_touch.py`, just a minimal mechanization of this skill's verbal advice. If you need something stronger, use this script as a starting point and adapt it to your project.
+`Agent` is the built-in dispatch tool's name (some docs/blogs from older Claude Code versions still say `Task` — if your version predates the rename, use that instead and confirm against your own `tool_name` in a hook payload). Hook the same script into both PreToolUse and PostToolUse — PostToolUse closes out the specific dispatch that finished, keyed by the call's `tool_use_id` (hook only one side and open dispatches never get closed). If your skill is installed at a different path, update the command path to match. By default it only warns quietly (visible only in the human-facing transcript) — to make Claude actually react to it (i.e. actually block), prefix the command with `DELEGATE_HOOK_STRICT=1` (`"command": "DELEGATE_HOOK_STRICT=1 python3 ..."`). This hook is example-level enforcement — not a red-team-tested CRITICAL-tier block like Hncs's `protect_never_touch.py`, just a minimal mechanization of this skill's verbal advice. If you need something stronger, use this script as a starting point and adapt it to your project.
+
+**Limitation:** the hook only counts *how many* dispatches are open, it doesn't know *which files* each one touches — two parallel dispatches editing the same file won't trip anything as long as the total count stays under the threshold. Catching that mechanically would mean parsing each brief for the files it intends to touch and cross-checking against the others' — out of scope for this example script; "never let two dispatches edit the same live file" (above) stays something you enforce by reading the briefs yourself.
