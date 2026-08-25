@@ -40,10 +40,15 @@ should not.
 
 Known heuristic limits, not bugs to chase further in an advisory script:
 the brief-detection regex only needs one path-shaped token anywhere in a
-long paste to pass, and "longest string field" as a brief-source guess
-can misfire if a future tool schema adds another long string field ahead
-of "prompt". Good enough for a nudge; not a substitute for actually
-reading the dispatch.
+long paste to pass; "longest string field" as a brief-source guess can
+misfire if a future tool schema adds another long string field ahead of
+"prompt"; a dispatch missing tool_use_id (shouldn't happen on current
+Claude Code, per its own hooks docs) is still warned about but silently
+untracked, since there's no stable key to file a marker under; and the
+24h orphan-cleanup threshold would sweep up a genuinely still-running
+dispatch that happened to be open that long, same as it would a crashed
+one - there's no way to tell the two apart from a mtime alone. Good
+enough for a nudge; not a substitute for actually reading the dispatch.
 
 Wire-up (see SKILL.md for the full settings.json snippet): matcher
 "Agent" on both PreToolUse and PostToolUse, both pointing at this same
@@ -78,10 +83,11 @@ def marker_path(tool_use_id):
 
 
 def count_open_dispatches():
-    """Count marker files, opportunistically deleting ones far too old to
-    still be a real dispatch (a crashed subagent whose PostToolUse never
-    fired). Doesn't hide a merely-long-running dispatch from the count -
-    only ORPHAN_MAX_AGE_SECONDS-old entries are treated as dead."""
+    """Count marker files, opportunistically deleting ones past
+    ORPHAN_MAX_AGE_SECONDS as presumed-crashed (a subagent whose
+    PostToolUse never fired). 24h is generous against a normal long-running
+    dispatch, but a genuinely still-running one that old would get swept up
+    too - an accepted heuristic limit, not solved here."""
     d = state_dir()
     try:
         names = os.listdir(d)
@@ -189,7 +195,12 @@ def main():
         )
         hit = True
 
-    if isinstance(tool_use_id, str):
+    # Only mark this dispatch open if it's actually going to run. A STRICT
+    # block (hit and STRICT) means finish() below exits 2 and the Agent
+    # call never happens - no PostToolUse will ever come to close a marker,
+    # so don't create one, or it'd sit there as a phantom "open" dispatch
+    # until the orphan-cleanup threshold finally clears it.
+    if not (hit and STRICT) and isinstance(tool_use_id, str):
         open_dispatch(tool_use_id)
     finish(hit)
 
