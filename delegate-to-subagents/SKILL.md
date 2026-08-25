@@ -24,6 +24,18 @@ The same discipline applies one level up: a principal engineer delegating to ano
 - **Scope permissions per role.** Don't give write access to a subagent that's only supposed to review — when responsibilities split, permissions should split too, so a reviewer can't drift into fixing things mid-review.
 - **Flat isn't the only shape.** Dispatching N independent subagents yourself is the default, but for a genuinely multi-role job (triage → fix → verify, or several specialized workstreams that need to hand off to each other), consider one coordinator subagent that dispatches and sequences the others, rather than you tracking every handoff directly. Reserve this for jobs with real inter-agent handoffs — a flat dispatch is simpler and should stay the default for independent, unrelated pieces of work.
 
+## Coordinating a hierarchy
+
+If you do reach for a coordinator, treat it as a real design decision, not just "add a middle layer":
+
+- **Depth limit: two levels, no more.** You → coordinator → workers. No coordinator-of-coordinators — past that, the reporting chain gets harder to verify than just staying flat would have been.
+- **The coordinator gets a narrow brief too**, same as any subagent — an open-ended "manage this" mandate drifts into scope creep for a coordinator exactly like it does for a worker.
+- **Give it an explicit escalation path for a stuck worker**: a fixed retry cap, then hand back to you with what was tried — the same "don't retry with the same instructions forever" rule that applies at the top applies one level down too.
+- **Decide the reporting shape up front.** Hub-and-spoke (the coordinator digests worker output before it reaches you) cuts noise but can hide a real disagreement between workers; a shared thread (workers see each other's output directly) keeps that visible but adds coupling. Default to hub-and-spoke; use a shared thread only when workers genuinely need each other's intermediate output to do their own job.
+- **Verify-before-claiming applies one level up.** A coordinator's "all three done, all green" is still a report, not evidence — spot-check it the same way you'd spot-check any subagent's claim.
+- **Route the coordinator's status traffic to a file/log**, not back into your live context — same reasoning as "give long-running work a name and a status line" below, just one hop further removed.
+- **Signal to retroactively promote flat to coordinator:** you're mid-task manually sequencing handoffs yourself — agent A's output has to shape agent B's brief, which has to shape agent C's. That hand-sequencing is the coordinator's job, not yours; once you notice you're doing it by hand, that's the cue to insert one.
+
 ## How to brief
 
 - Give **the task + interfaces it touches + constraints.** Don't paste a summarized session history — hand over file paths and let the subagent read them itself.
