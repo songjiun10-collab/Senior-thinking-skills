@@ -1,1 +1,127 @@
-# Senior-thinking-skills
+# Senior + Principal + Distinguished + Executive Engineer Mindset — Skill Bundle
+
+A skill collection that makes an AI think like a senior, principal, distinguished/fellow, *and* executive-level (CTO/VP-Eng) engineer before writing code — four stacked lenses (this task, cross-team, company/industry-wide, organizational/business authority), most tasks only needing the first. Instead of one giant skill, it's split into **small, composable disciplines**.
+
+## Structure
+
+Split along the invocation axis:
+
+- **user-invoked (router)** — called directly by a person. Its job is orchestration. It can call the model-invoked skills below, but **never calls another router**.
+- **model-invoked (discipline)** — a person can call it too, but the agent also pulls it out on its own when the task calls for it. The reusable disciplines live here.
+
+## List
+
+### Router (user-invoked)
+
+| Skill | Role |
+|---|---|
+| `senior-engineer-mindset` | Picks the disciplines that fit the task and routes to them. Scale-adjustment and output format live here too |
+
+### Disciplines (model-invoked)
+
+| Stage | Skill | Role |
+|---|---|---|
+| Verify | `search-first` | External APIs/libraries: docs, not memory |
+| Verify | `context-economy` | Splits what belongs in context vs. in a file |
+| Understand | `clarify-the-real-problem` | Digs out the real goal behind the request |
+| Explore | `widen-the-solution-space` | Widens candidate approaches across 12 axes, narrows to 2-3 |
+| Decide | `weigh-tradeoffs` | Comparing alternatives + how much the decision matters (reversibility) |
+| Decide | `record-the-why` | Records the decision and rejected alternatives permanently (ADR) |
+| Design | `premortem` | Failure scenarios and failure detection |
+| Design | `simplicity-budget` | YAGNI + complexity budget |
+| Design | `design-for-the-next-reader` | Interfaces first + the reader six months out |
+| Design | `interface-contracts` | Hyrum's Law — anything you expose becomes a promise |
+| Design | `threat-and-scale-check` | Trust boundaries · scale · layered defense |
+| Verification | `verifiability-first` | Declaring success criteria + testable design |
+| Plan | `bite-sized-plan` | File structure → task breakdown → 2-5 minute steps |
+| Delegate | `delegate-to-subagents` | Judging when/how to delegate to a subagent, briefing, verifying (+ optional PreToolUse/PostToolUse hook bundle) |
+| Debug | `root-cause-discipline` | Check if it's already solved → root cause → evidence |
+| Execution | `chestertons-fence` | Understand why something exists before removing or simplifying it |
+| Execution | `surgical-change` | Don't add lines that don't trace to the request (+ change-size / severity labels) |
+| Execution | `measure-before-optimizing` | Performance: evidence (measurement) first — never optimize on a guess |
+| Execution | `honest-artifacts` | Unverified labels · reproducibility · metric traps |
+| Look back | `fresh-context-review` | Strip the context you wrote it in, review on two axes: spec compliance · code quality |
+| Look back | `verify-before-claiming` | Never claim done without evidence |
+| Look back | `adversarial-review` | Interrogate with a disproof bias while course-correction is still cheap |
+
+## How to use it
+
+All three are valid:
+
+1. **Install all of it and leave it alone** — the router reads the situation and picks
+2. **Install only the disciplines you need** — each one works independently. Want only the debugging discipline? Take just `root-cause-discipline`
+3. **Fork and edit it** — written assuming you'll reword it to match your team's conventions
+
+## Design principles
+
+- **22 skills of 30-70 lines** beat one 1100-line skill. Only what's needed loads into context, and only the unneeded part can be deleted
+- Each skill's `description` carries **when to fire**. The body carries **what to do**, nothing else
+- Scale-adjustment is the router's job. Writing a design memo for a single function is a failure
+
+## Sources
+
+This bundle pulled ideas from ten places and reconstructed them.
+
+| Source | Link | What was taken |
+|---|---|---|
+| addyosmani/agent-skills | https://github.com/addyosmani/agent-skills | Hyrum's Law (API design), Chesterton's Fence (understand before simplifying), disproof-biased review (adversarial framing), change-size thresholds (~100/300/1000 lines), severity labels (Critical/Nit/Optional/FYI), refusing "I'll clean it up later", measure→identify→fix→re-measure (performance optimization), ADR-style documentation that records the why |
+| obra/superpowers | https://github.com/obra/superpowers | **Most referenced** — 4-phase systematic debugging + the 3-failure rule, a verification gate before "done", spike/bounded/structural 3-track classification with a one-way ratchet, finely-sliced planning, red-flag/rationalization tables, YAGNI, complexity reduction, evidence-first — plus subagent delegation (recording a baseline before dispatch, reports/reviews as files, a capped fix→re-review loop with recorded rulings, the controller never self-fixes — from subagent-driven-development) |
+| songjiun10-collab/Hncs | https://github.com/songjiun10-collab/Hncs | Unverified-value labeling, reproducibility audits, avoiding metric overfitting (favor the conservative choice), surgical changes, checking for an existing answer before digging deep, risk-tiered gates, subagent delegation principles (minimal briefing, one at a time, verify reports yourself — from CLAUDE.md's "Controller/Implementer" section) |
+| mattpocock/skills | https://github.com/mattpocock/skills | **The whole structure** — the user-invoked-router / model-invoked-discipline split, small composable skills, splitting spec-axis and standards-axis review |
+| affaan-m/ECC | https://github.com/affaan-m/ECC | Checking docs before coding (research-first), fresh-context review, context economy ("optimize context, persist the rest"), the workflow loop |
+| shinpr/sub-agents-skills | https://github.com/shinpr/sub-agents-skills | Splitting subagent permissions by role (review/implementation/testing need separated permissions, not just separated instructions) |
+| WenyuChiou/agent-collab-skills | https://github.com/WenyuChiou/agent-collab-skills | Adversarial debate (putting two agents on opposing sides of a consequential decision), reconciling results from competing exploration |
+| rohitg00/awesome-claude-code-toolkit | https://github.com/rohitg00/awesome-claude-code-toolkit | Multiple agents competitively exploring the same problem in isolated workspaces, then comparing and choosing |
+| obra/superpowers (dispatching-parallel-agents) | https://github.com/obra/superpowers/blob/main/skills/dispatching-parallel-agents/SKILL.md | The bar for independent-domain parallel dispatch (several unrelated failures vs. related ones), parallel-brief structure (narrow scope + constraints + deliverable), pre-merge reconciliation steps (review summaries individually → check for overlap → run the full suite) |
+| affaan-m/ECC (dmux-workflows) | https://github.com/affaan-m/ECC/blob/main/skills/dmux-workflows/SKILL.md | Uncommitted files are invisible under git-worktree isolation, and need to be added explicitly (seedPaths) |
+
+### Per-skill provenance
+
+| Skill | Primary source |
+|---|---|
+| `senior-engineer-mindset` (router) | mattpocock (structure) + ECC (flow) |
+| `search-first` | ECC |
+| `context-economy` | ECC + Hncs |
+| `clarify-the-real-problem` | superpowers + Hncs |
+| `widen-the-solution-space` | original |
+| `weigh-tradeoffs` | original + Hncs (risk-tiered gates) |
+| `record-the-why` | addyosmani (documentation-and-adrs) |
+| `premortem` | original |
+| `simplicity-budget` | superpowers + Hncs |
+| `design-for-the-next-reader` | superpowers + mattpocock (deep modules) |
+| `interface-contracts` | addyosmani (Hyrum's Law) |
+| `chestertons-fence` | addyosmani |
+| `adversarial-review` | addyosmani (doubt-driven-development) |
+| `threat-and-scale-check` | Hncs (layered defense) |
+| `verifiability-first` | superpowers (TDD) + Hncs (declaring success criteria) |
+| `bite-sized-plan` | superpowers |
+| `delegate-to-subagents` | superpowers (subagent-driven-development + dispatching-parallel-agents) + Hncs (CLAUDE.md "Controller/Implementer" section) + shinpr/sub-agents-skills (role-based permission separation) + WenyuChiou/agent-collab-skills · rohitg00/awesome-claude-code-toolkit (competing exploration, adversarial debate) + ECC (dmux-workflows, uncommitted-file handling under worktree isolation) |
+| `verify-before-claiming` | superpowers |
+| `root-cause-discipline` | superpowers (4-phase, 3-failure rule) + Hncs |
+| `surgical-change` | Hncs + addyosmani (change-size / severity labels) |
+| `measure-before-optimizing` | addyosmani (performance-optimization) |
+| `honest-artifacts` | Hncs |
+| `fresh-context-review` | ECC + mattpocock |
+
+### What wasn't brought in
+
+Left out deliberately — skill docs alone can't implement these, and including them would produce "documentation that pretends to work."
+
+- ECC's instincts / continuous-learning (auto-extracting patterns from a session), memory vaults, AgentShield — harness runtime features
+- Hncs's hook-based enforcement (PreToolUse/PostToolUse gates) — needs a real execution environment
+- mattpocock's issue-tracker-integration skills (`triage`, `to-tickets`) — outside this bundle's scope (thinking before you write code)
+
+Each original follows its own license. This bundle reconstructs those ideas, not a code copy.
+
+## Update log
+
+- 2026-08-24: Added `measure-before-optimizing` and `record-the-why` (both reconstructed from addyosmani/agent-skills — performance-optimization and documentation-and-adrs respectively). Re-searched GitHub and found two gaps in the original 20 (measuring before performance work, permanently recording decision reasoning). The rest of that repo's skills (ci-cd, git-workflow, browser-testing, frontend-ui, etc.) stayed excluded — tooling/domain-specific, outside this bundle's scope.
+- 2026-08-24 (later, same day): Re-swept the other 4 sources (superpowers, mattpocock, ECC, Hncs) — confirmed no gaps, nothing added. superpowers' `brainstorming` (spike/bounded/structural 3-track classification + hard gate) is already the router's own structure; mattpocock's `code-review` (parallel spec-axis/standards-axis review) is already in `fresh-context-review`'s provenance; ECC's `security-review` is specific to a Next.js/Supabase/Solana stack, out of scope and redundant with this session environment's separate system skill. Widening the search to all of GitHub (including forrestchang/andrej-karpathy-skills, the most talked-about related repo) turned up the same result — its 4 principles turned out to already be the exact section titles under Hncs's own CLAUDE.md "Working principles," so nothing new there either.
+- 2026-08-24 (later, third pass): Added `delegate-to-subagents` (reconstructed from Hncs's CLAUDE.md Controller/Implementer section — when to delegate, what to include/exclude in a brief, how to verify a report). The bundle's first skill carrying `scripts/` — `check_dispatch_brief.py` detects overlapping dispatches and transcript-paste-style briefs at Task-call time (PreToolUse/PostToolUse). Default is advisory (visible to a human, doesn't affect Claude's behavior); `DELEGATE_HOOK_STRICT=1` actually blocks and returns the reason to Claude. Verified with 6 isolated-stdin cases (non-Task passthrough, clean brief passthrough, long-paste detection, count closing on PostToolUse, STRICT-mode exit 2, fail-open on malformed input) — explicitly noted in SKILL.md that this is a different design tier from Hncs's real hooks (`_hook_common.py`, CRITICAL, deny-by-default).
+- 2026-08-25: Strengthened `delegate-to-subagents` — the first draft only looked at Hncs and missed the `superpowers:subagent-driven-development` skill that this very repo's CLAUDE.md actually points to; read it and folded it in after that was flagged. Added: recording a baseline (`git rev-parse HEAD`) right before dispatch — use that baseline, not `HEAD~1`, when scoping a later diff/review (an intervening commit silently corrupts `HEAD~1`'s range); reports and reviews as files (survive compaction); a cap on the fix→re-review loop, with the controller adjudicating and recording a ruling once the cap is hit (never silently discarded); review findings go to one subagent at once rather than one subagent per finding; the controller never self-fixes; waiting for the completion signal instead of tight polling. superpowers' full apparatus (git-worktree isolation, a ledger file, `scripts/task-brief` / `scripts/review-package`) didn't fit this bundle's 30-70-line compact-discipline style, so only the principles were kept, not the script infrastructure.
+- 2026-08-25 (later, same day): Widened the subagent-orchestration sweep per "check other projects too" — read the actual READMEs for shinpr/sub-agents-skills, WenyuChiou/agent-collab-skills, rohitg00/awesome-claude-code-toolkit. Folded in three things: (1) role-based permission separation (don't give a reviewer write access — shinpr), (2) an explicit exception to "one at a time": deliberately racing approaches in isolated workspaces for comparison (rohitg00 + WenyuChiou's task-splitter/reconciler), (3) adversarial debate — putting two agents on opposing sides when judgment is split on a hard-to-reverse decision (WenyuChiou's adversarial-debate). WenyuChiou's shared-memory (`.coord/memory.yml`, a cross-session blackboard) overlapped heavily with the baseline-recording/ruling-recording principle already folded in from superpowers, so it wasn't pulled in separately.
+- 2026-08-25 (later, third pass): Re-checked the remaining two sources on this same topic per "and ECC and matt-whatsit too." Found nothing relevant in **mattpocock** (there was an X post about an `/implement-spec` skill implementing tickets in subagents at maximum concurrency, but it's a tweet, not a maintained SKILL.md, so it wasn't used as a source). Pulled one thing from **ECC**'s `dmux-workflows` (tmux-based parallel agent orchestration): under git-worktree isolation, uncommitted local files are invisible to a worker, and the `seedPaths` concept for adding them explicitly. In the process, discovered that **superpowers itself has a dedicated skill, `dispatching-parallel-agents`**, which had been missed — folded it in too: the bar for independent-domain parallel dispatch (dispatching several unrelated failures at once within one response) vs. sequential dispatch, and pre-merge reconciliation steps (review summaries individually → check for overlap → run the full suite). While integrating this, found that `check_dispatch_brief.py`'s "warn on any overlapping dispatch" logic was itself a problem — 2-3 concurrent independent-domain dispatches is exactly the normal pattern the skill recommends, and the hook was flagging all of it. Raised the threshold from "1 or more open" to **"4 or more open"** and softened the wording from "this is wrong" to "confirm these are actually independent." Re-verified with isolated stdin (quiet through 3 open, warns on the 4th).
+- 2026-08-25 (later, fourth pass): Translated the entire bundle to English and blended Principal-engineer-level thinking into the existing Senior-engineer-level content, per explicit direction. Each discipline got at least one "Principal angle" bullet extending its existing checklist to cross-team blast radius, precedent-setting, and longer-horizon technical direction — not a rewrite into an org-strategy essay, just an added lens. Directory and `name:` frontmatter fields were left unchanged (English translation only touches prose and the `description:` field) so existing installs and cross-references keep working.
+- 2026-08-25 (later, fifth pass): Added a third tier above Principal — Distinguished/Fellow — per explicit direction ("a grade higher than Principal too"). Every one of the 22 disciplines got exactly one more bullet, always placed right after the existing Principal-level content, distinguishing scope by *scale and time horizon*: Principal reasons in terms of teams and quarters, Distinguished/Fellow reasons in terms of the whole company or industry and years (does this show up in company-wide strategy conversations, could it become a de facto standard or get open-sourced/talked about externally, does it need to survive scrutiny from someone joining in five years with zero institutional memory). Router retitled again to "Senior + Principal + Distinguished Engineer Mindset." Same execution pattern as the translation pass — 5 parallel subagents on independent file batches, each verified after: `grep` confirmed exactly one "Distinguished" mention per discipline file (24 matches across 24 files — 22 disciplines + README + the router's 3 intro mentions), all 23 skills re-validated with `quick_validate.py`, every `name:` field re-checked against its directory, no stray non-English text introduced.
+- 2026-08-25 (later, sixth pass): Added a fourth tier — Executive (CTO/VP-Eng) — above Distinguished/Fellow, from a brainstormed-options list the user picked "1, 2, 7" from. Distinguished/Fellow tops out as an individual-contributor lens (influence through technical credibility); Executive shifts to actual organizational levers: headcount and team structure, budget and total cost of ownership (not just engineering effort), and business risk (regulatory, competitive, customer-trust) a CFO or board would want visibility into. Every one of the 22 disciplines got one more bullet, placed right after the existing Distinguished/Fellow bullet, labeled "**Executive angle (CTO/VP-Eng):**". Router retitled again to "Senior + Principal + Distinguished + Executive Engineer Mindset." Same 5-parallel-subagent-batch pattern, same verification afterward: `grep` confirmed exactly one "Executive angle" per discipline file (22/22), all 23 skills re-validated.
+- 2026-08-25 (same brainstorm, in progress): The other two picked options are being worked in parallel — (1) a router-only trigger-description optimization pass via skill-creator's `scripts/run_loop` (20 hand-written eval queries, 10 should-trigger/10 should-not, run against the live `claude` CLI in this environment since a browser isn't available for the interactive eval-review step), and (2) splitting this bundle into its own standalone GitHub repository, pending the user's answer on repo name/visibility/license.
