@@ -22,6 +22,7 @@ The same discipline applies one level up: a principal engineer delegating to ano
   - Deliberately having multiple agents solve the same problem differently, to compare approaches, is a different case — run those in isolated workspaces each (e.g. git worktrees). Note a worktree only sees committed content — if a worker needs uncommitted drafts or scripts, copy those files in explicitly; assuming "it'll be visible anyway" means the worker won't find them.
 - "I don't feel like doing it" isn't a reason to delegate. Saving context, a genuinely independent domain, or comparing approaches — delegate for a reason.
 - **Scope permissions per role.** Don't give write access to a subagent that's only supposed to review — when responsibilities split, permissions should split too, so a reviewer can't drift into fixing things mid-review.
+- **Flat isn't the only shape.** Dispatching N independent subagents yourself is the default, but for a genuinely multi-role job (triage → fix → verify, or several specialized workstreams that need to hand off to each other), consider one coordinator subagent that dispatches and sequences the others, rather than you tracking every handoff directly. Reserve this for jobs with real inter-agent handoffs — a flat dispatch is simpler and should stay the default for independent, unrelated pieces of work.
 
 ## How to brief
 
@@ -29,6 +30,7 @@ The same discipline applies one level up: a principal engineer delegating to ano
 - Pasted text or a returned summary sits in your context from that point on. Passing a file path is always cheaper.
 - If the target is vague ("fix this up"), narrow it yourself before delegating — a vague brief comes back as a vague result.
 - **Record a baseline right before dispatching** (e.g. `git rev-parse HEAD`). Use this baseline later for diffs and review scope — `HEAD~1` silently picks the wrong range if another commit landed in between.
+- **If the same kind of task recurs, capture the brief once as a reusable template** instead of re-explaining it from scratch each time — and fold in corrections as they come up, so the template actually improves with use instead of staying a stale first draft.
 
 ## Verify what comes back
 
@@ -44,6 +46,17 @@ The same discipline applies one level up: a principal engineer delegating to ano
 - **Cap the fix → re-review loop** (e.g. 3 rounds). Past the cap without resolution, judge it yourself: wrong or trivial → note why and move on; real and material → decide the smallest fix yourself and record it. **Never drop it silently** — record the verdict and the reason either way.
 - **Don't fix it yourself** (except a minor case you judge doesn't need review). A controller fixing things directly skips the review step, and that code piles into your own context.
 - For a hard-to-reverse decision where judgment is split, instead of one more review, put two agents on opposing sides to argue it out — a tradeoff invisible from one side alone sometimes only shows up that way (a heavier tool, for situations like `weigh-tradeoffs` / `adversarial-review`).
+
+## Calibrate how often you interrupt
+
+- Don't ask for confirmation on every step — let the routine, reversible ones go through silently and save the interrupt for the one that actually matters. Asking "OK to proceed?" on trivial steps trains the user to rubber-stamp everything, which defeats the point of asking at all.
+- Same bar as `weigh-tradeoffs`: reversible → just do it and show the result after; irreversible or consequential → stop and ask before, not after.
+- A subagent that reproduces a bug, files the ticket, and fixes it — surfacing only the one call that actually needed a human ("should this also roll out to the EU region?") — is more useful than one that narrates every intermediate step.
+
+## Give long-running work a name and a status line
+
+- When a delegated agent runs over a longer stretch, don't leave it silent until it finishes — give it a short name and keep a one-line status that updates as it progresses ("Inbox Manager — sent, inbox at zero, 5 drafts parked"). A glanceable roster beats a wall of silence followed by one huge report at the end.
+- This is for genuinely long-running or ongoing delegations, not a two-minute task — for a short dispatch, just wait for the completion signal (see "Common failures" below).
 
 ## Common failures
 
