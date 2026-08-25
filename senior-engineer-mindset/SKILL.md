@@ -32,6 +32,7 @@ In rough workflow order:
 |---|---|---|
 | Verify | `search-first` | Check external APIs/libraries against docs, not memory |
 | Verify | `context-economy` | What goes in context vs. in a file |
+| Verify | `persistent-memory` | Capture a recurring correction/preference into a durable file (+ CLI) instead of re-learning it every session |
 | Understand | `clarify-the-real-problem` | Dig out the real goal behind the request |
 | Explore | `widen-the-solution-space` | Widen the candidates instead of settling on the first idea |
 | Decide | `weigh-tradeoffs` | Compare alternatives and weigh how much the decision matters |
@@ -76,6 +77,7 @@ In rough workflow order:
 | Hard-to-reverse decision (schema, public API, migration) | adversarial-review · weigh-tradeoffs · record-the-why |
 | Running subagents / multiple agents | delegate-to-subagents · bite-sized-plan |
 | Choice other teams will likely copy | record-the-why · weigh-tradeoffs · interface-contracts |
+| Same correction/preference keeps recurring across sessions | persistent-memory · delegate-to-subagents |
 
 Not in the table? Start with `clarify-the-real-problem` + `premortem` + `weigh-tradeoffs`.
 
