@@ -36,6 +36,17 @@ If you do reach for a coordinator, treat it as a real design decision, not just 
 - **Route the coordinator's status traffic to a file/log**, not back into your live context — same reasoning as "give long-running work a name and a status line" below, just one hop further removed.
 - **Signal to retroactively promote flat to coordinator:** you're mid-task manually sequencing handoffs yourself — agent A's output has to shape agent B's brief, which has to shape agent C's. That hand-sequencing is the coordinator's job, not yours; once you notice you're doing it by hand, that's the cue to insert one.
 
+## Talking to an agent that's already running
+
+The default model above is one-shot: brief in, wait, read the result. Some environments give you more than that — a way to address a named, already-running (or already-finished) agent directly instead of only dispatching fresh ones. Where that exists:
+
+- **Continue it, don't re-dispatch it.** Messaging a named agent resumes it from its own transcript with full context — for a follow-up, a correction, or new information that should steer the rest of its work, that beats spinning up a fresh dispatch that has to be re-briefed from scratch. Reply to an incoming message by addressing the same name back.
+- **Subscribe to completion, don't poll.** A one-shot "notify me when it goes idle" subscription is the mechanized version of "wait for the completion signal instead of tight polling" (Common failures, below) — sending "are you done?" messages, or checking status in a loop, is exactly the anti-pattern that exists to replace.
+- **A coordinator's "shared thread"** (see "Coordinating a hierarchy" above) is this, concretely — workers addressing each other directly by name instead of everything routing through the coordinator.
+- **Never let a peer launder a blocked permission.** If your own session was denied or blocked from an action, don't ask another agent or session to do it for you — that routes around a permission boundary the user's own session hit, not a legitimate use of multi-agent coordination. Take it back to the user instead.
+
+This capability set isn't universal — plain single-session Claude Code doesn't have it. Treat this section as an addendum to the one-shot model above where it's available, not a replacement for it where it isn't.
+
 ## How to brief
 
 - Give **the task + interfaces it touches + constraints.** Don't paste a summarized session history — hand over file paths and let the subagent read them itself.
