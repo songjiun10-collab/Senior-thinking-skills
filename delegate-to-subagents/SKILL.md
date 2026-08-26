@@ -1,7 +1,7 @@
 ---
 name: delegate-to-subagents
 description: >-
-  Decide when to hand work to a subagent instead of doing it yourself, how to brief it, how to run the fix/review loop when something comes back wrong, and how to verify what comes back. Use when a task is big enough to delegate (independent research, a parallelizable slice, a second opinion, a review pass), when running more than one agent, when a subagent's report claims something is finished, or when a review comes back with findings that need fixing. Skip for single-step edits or when no subagent tooling is available. Bundles an optional PreToolUse/PostToolUse hook (scripts/check_dispatch_brief.py) that nudges on two of the mistakes this skill warns about.
+  Decide when to hand work to a subagent instead of doing it yourself, how to brief it, how to run the fix/review loop when something comes back wrong, and how to verify what comes back. Use when a task is big enough to delegate (independent research, a parallelizable slice, a second opinion, a review pass), when running more than one agent, when a subagent's report claims something is finished, or when a review comes back with findings that need fixing. Skip for single-step edits or when no subagent tooling is available. Bundles an optional PreToolUse/PostToolUse hook (scripts/check_dispatch_brief.py) that nudges on two of the mistakes this skill warns about, plus an execution-state dashboard CLI (scripts/execution_manager.py) for a coordinator tracking multiple workers.
 ---
 
 # Delegating to Subagents
@@ -33,7 +33,7 @@ If you do reach for a coordinator, treat it as a real design decision, not just 
 - **Give it an explicit escalation path for a stuck worker**: a fixed retry cap, then hand back to you with what was tried — the same "don't retry with the same instructions forever" rule that applies at the top applies one level down too.
 - **Decide the reporting shape up front.** Hub-and-spoke (the coordinator digests worker output before it reaches you) cuts noise but can hide a real disagreement between workers; a shared thread (workers see each other's output directly) keeps that visible but adds coupling. Default to hub-and-spoke; use a shared thread only when workers genuinely need each other's intermediate output to do their own job.
 - **Verify-before-claiming applies one level up.** A coordinator's "all three done, all green" is still a report, not evidence — spot-check it the same way you'd spot-check any subagent's claim.
-- **Route the coordinator's status traffic to a file/log**, not back into your live context — same reasoning as "give long-running work a name and a status line" below, just one hop further removed.
+- **Route the coordinator's status traffic to a file/log**, not back into your live context — same reasoning as "give long-running work a name and a status line" below, just one hop further removed. `scripts/execution_manager.py` gives this an actual dashboard instead of leaving it as prose (see "Optional: track execution state with a script" below) — it tracks status, it doesn't decide anything; noticing a worker's been stuck too long is still your judgment call, the script just puts the information in front of you instead of you having to remember to ask.
 - **Signal to retroactively promote flat to coordinator:** you're mid-task manually sequencing handoffs yourself — agent A's output has to shape agent B's brief, which has to shape agent C's. That hand-sequencing is the coordinator's job, not yours; once you notice you're doing it by hand, that's the cue to insert one.
 
 ## Talking to an agent that's already running
@@ -121,3 +121,35 @@ Add to `.claude/settings.json`:
 `Agent` is the built-in dispatch tool's name (some docs/blogs from older Claude Code versions still say `Task` — if your version predates the rename, use that instead and confirm against your own `tool_name` in a hook payload). Hook the same script into both PreToolUse and PostToolUse — PostToolUse closes out the specific dispatch that finished, keyed by the call's `tool_use_id` (hook only one side and open dispatches never get closed). If your skill is installed at a different path, update the command path to match. By default it only warns quietly (visible only in the human-facing transcript) — to make Claude actually react to it (i.e. actually block), prefix the command with `DELEGATE_HOOK_STRICT=1` (`"command": "DELEGATE_HOOK_STRICT=1 python3 ..."`). This hook is example-level enforcement — not a red-team-tested CRITICAL-tier block like Hncs's `protect_never_touch.py`, just a minimal mechanization of this skill's verbal advice. If you need something stronger, use this script as a starting point and adapt it to your project.
 
 **Limitation:** the hook only counts *how many* dispatches are open, it doesn't know *which files* each one touches — two parallel dispatches editing the same file won't trip anything as long as the total count stays under the threshold. Catching that mechanically would mean parsing each brief for the files it intends to touch and cross-checking against the others' — out of scope for this example script; "never let two dispatches edit the same live file" (above) stays something you enforce by reading the briefs yourself.
+
+## Optional: track execution state with a script
+
+Acting as a coordinator over several workers (see "Coordinating a hierarchy") means tracking whose status is what — `scripts/execution_manager.py` is a small CLI for that, so it doesn't have to live in your head or get re-derived from scratch every time you check in:
+
+```bash
+python3 scripts/execution_manager.py start worker-a "exploring the auth bug"
+python3 scripts/execution_manager.py update worker-a blocked "waiting on a prod API key"
+python3 scripts/execution_manager.py dashboard
+python3 scripts/execution_manager.py clear worker-a
+```
+
+`dashboard` prints one line per tracked worker — status, elapsed time, and note — and flags any `blocked` entry that's been stuck past `EXECUTION_MANAGER_BLOCKED_WARN_SECONDS` (default 1800s). **Be precise about what this does and doesn't do:** it tracks and displays status; it does not detect that a worker has a problem (something has to call `update ... blocked` — the worker itself, or you noticing), and it does not decide what to do about a stale one — that's still your judgment call, same as everywhere else in this skill. Read "problem detected → automatic decision → automatic fix" nowhere in this script; it stops at "here's what's stale, go look."
+
+Optionally wire it as a `PreToolUse` hook on the `Agent` tool so a stale-blocked warning surfaces automatically right before you dispatch yet another worker, instead of only when you remember to run `dashboard` yourself:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          { "type": "command", "command": "python3 .claude/skills/delegate-to-subagents/scripts/execution_manager.py hook" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+This can sit in the same `PreToolUse`/`Agent` matcher block as `check_dispatch_brief.py` above — Claude Code runs every hook command listed under a matcher, in order. State lives in its own file (`.claude/hooks/.execution_manager_state.json` by default, override with `EXECUTION_MANAGER_STATE_FILE`), separate from `check_dispatch_brief.py`'s marker files, so the two don't interfere with each other. Verified with 13 isolated stdin/CLI cases (empty dashboard, start/update/clear, unknown-status rejection, hook mode silent when nothing's stale, hook mode warning once staleness is simulated, PostToolUse and non-Agent calls both silent, malformed stdin fails open, multiple workers with mixed states).
