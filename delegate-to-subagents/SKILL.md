@@ -55,6 +55,7 @@ Beyond a live dispatch or a continued conversation, some environments can fire a
 - Use this for the reusable-template-on-a-schedule case from "How to brief" above (a recurring brief that re-fires itself instead of you remembering to re-dispatch it), or for a check-in on long-running work instead of manually deciding when to look again.
 - **This isn't the same as "always running."** The trigger fires a fresh turn into a session — the underlying environment can still reclaim an idle container between firings. It gets you unattended re-invocation at a point in time, not a persistent background process running continuously in between.
 - Not universal — this is specific scheduling tooling, not something every Claude Code environment has; confirm yours actually has it before relying on it, the same caveat as "Talking to an agent that's already running" above.
+- **Test-run it once before trusting it unattended.** Fire it manually first and check the whole path: the right input actually gets picked up, the output lands where expected, and a failure is visible somewhere instead of silently swallowed. Don't let the first real run also be the first tested run.
 
 ## How to brief
 
@@ -83,6 +84,7 @@ Beyond a live dispatch or a continued conversation, some environments can fire a
 
 - Don't ask for confirmation on every step — let the routine, reversible ones go through silently and save the interrupt for the one that actually matters. Asking "OK to proceed?" on trivial steps trains the user to rubber-stamp everything, which defeats the point of asking at all.
 - Same bar as `weigh-tradeoffs`: reversible → just do it and show the result after; irreversible or consequential → stop and ask before, not after.
+- **A confirmation gate protects the next action, not what already happened.** If a subagent already sent the email or merged the commit, asking "OK to proceed?" afterward is theater — the interrupt has to sit before the irreversible call fires, not at the point where you happen to read the report.
 - A subagent that reproduces a bug, files the ticket, and fixes it — surfacing only the one call that actually needed a human ("should this also roll out to the EU region?") — is more useful than one that narrates every intermediate step.
 
 ## Give long-running work a name and a status line
