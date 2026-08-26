@@ -47,13 +47,22 @@ The default model above is one-shot: brief in, wait, read the result. Some envir
 
 This capability set isn't universal — plain single-session Claude Code doesn't have it. Treat this section as an addendum to the one-shot model above where it's available, not a replacement for it where it isn't.
 
+## Scheduled/unattended execution
+
+Beyond a live dispatch or a continued conversation, some environments can fire a saved prompt at a future time — into this session, a specific other session, or a fresh one — without anyone needing to be present when it fires.
+
+- **Verified, not theoretical:** a one-shot trigger was scheduled 2 minutes out; it fired on its own, delivered as a new turn carrying the actual fire time, and the scheduled command ran for real (a `persistent-memory` append landed in `.claude/memory/scheduled-execution-demo.md`, confirmed by reading the file back afterward) — not a hypothetical capability described secondhand.
+- Use this for the reusable-template-on-a-schedule case from "How to brief" above (a recurring brief that re-fires itself instead of you remembering to re-dispatch it), or for a check-in on long-running work instead of manually deciding when to look again.
+- **This isn't the same as "always running."** The trigger fires a fresh turn into a session — the underlying environment can still reclaim an idle container between firings. It gets you unattended re-invocation at a point in time, not a persistent background process running continuously in between.
+- Not universal — this is specific scheduling tooling, not something every Claude Code environment has; confirm yours actually has it before relying on it, the same caveat as "Talking to an agent that's already running" above.
+
 ## How to brief
 
 - Give **the task + interfaces it touches + constraints.** Don't paste a summarized session history — hand over file paths and let the subagent read them itself.
 - Pasted text or a returned summary sits in your context from that point on. Passing a file path is always cheaper.
 - If the target is vague ("fix this up"), narrow it yourself before delegating — a vague brief comes back as a vague result.
 - **Record a baseline right before dispatching** (e.g. `git rev-parse HEAD`). Use this baseline later for diffs and review scope — `HEAD~1` silently picks the wrong range if another commit landed in between. `git rev-parse HEAD` alone misses **uncommitted** changes already in the working tree at dispatch time — if there were any, also snapshot `git diff` (and `git diff --cached`) before dispatching, or just commit/stash first so the baseline is clean. Otherwise a later "what changed" diff mixes the subagent's work with whatever was already sitting there.
-- **If the same kind of task recurs, capture the brief once as a reusable template** instead of re-explaining it from scratch each time — and fold in corrections as they come up, so the template actually improves with use instead of staying a stale first draft (see `persistent-memory` for the actual file-based mechanism and a small CLI for it). If your environment has a real scheduler (a cron-style trigger that re-fires a saved prompt), wire the template into one instead of manually re-dispatching it each time it comes up — same end state as "demonstrate a workflow once, replay it on a schedule," just built from an explicit saved prompt rather than something the agent is assumed to remember on its own.
+- **If the same kind of task recurs, capture the brief once as a reusable template** instead of re-explaining it from scratch each time — and fold in corrections as they come up, so the template actually improves with use instead of staying a stale first draft (see `persistent-memory` for the actual file-based mechanism and a small CLI for it). If your environment has a real scheduler, wire the template into one instead of manually re-dispatching it each time it comes up (see "Scheduled/unattended execution" below) — same end state as "demonstrate a workflow once, replay it on a schedule," just built from an explicit saved prompt rather than something the agent is assumed to remember on its own.
 
 ## Verify what comes back
 
