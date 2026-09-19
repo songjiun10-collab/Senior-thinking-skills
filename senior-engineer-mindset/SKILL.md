@@ -44,14 +44,18 @@ In rough workflow order:
 | Design-check | `threat-and-scale-check` | Trust boundaries, scale, layered defense |
 | Verification design | `verifiability-first` | Nail down the success criterion first |
 | Plan | `bite-sized-plan` | Turn the design into small, independently-testable tasks |
+| Plan | `plan-on-disk` | Keep the plan on disk (task_plan/findings/progress) so it survives /clear, compaction, and long runs |
 | Delegate | `delegate-to-subagents` | Judging when/how to delegate, briefing, verifying (+ optional hook) |
 | Debug | `root-cause-discipline` | Check if it's already solved → root cause → evidence |
 | Execution discipline | `chestertons-fence` | Understand why something exists before removing or simplifying it |
 | Execution discipline | `surgical-change` | Don't add lines that don't trace back to the request |
 | Execution discipline | `measure-before-optimizing` | Performance work starts with evidence (measurement), not guessing |
 | Execution discipline | `honest-artifacts` | Unverified labels, reproducibility, metric traps |
+| Execution discipline | `security-review` | OWASP-based review of security-sensitive diffs before they ship |
+| Execution discipline | `security-review-by-halo` | Trust the checking itself as a fallible monitor — independent evidence, stale verdicts, worst case, fail closed |
 | Look back | `fresh-context-review` | Strip your own assumptions and look at the result again |
 | Look back | `verify-before-claiming` | Actually run it before claiming it's done |
+| Look back | `verify-before-agreeing` | Evaluate review feedback technically before implementing it |
 | Look back | `adversarial-review` | Interrogate an in-flight decision with a disproof bias |
 
 ## Situational picks
@@ -63,6 +67,7 @@ In rough workflow order:
 | Using an external library/API | search-first · premortem |
 | Wrapping up an implementation | verify-before-claiming · fresh-context-review · surgical-change |
 | Starting a multi-step task | bite-sized-plan · verifiability-first |
+| Long-running task / resuming after /clear or compaction | plan-on-disk · bite-sized-plan |
 | Handoff / cleaning up a long session | context-economy · honest-artifacts |
 | Choosing a technology/library | widen-the-solution-space · weigh-tradeoffs · simplicity-budget |
 | Designing an API/interface | interface-contracts · design-for-the-next-reader · weigh-tradeoffs |
@@ -74,6 +79,9 @@ In rough workflow order:
 | Slotting into existing code | surgical-change · root-cause-discipline · design-for-the-next-reader |
 | Measurement / experiment / parameter tuning | verifiability-first · honest-artifacts |
 | Auth / permissions / safety mechanisms | threat-and-scale-check · adversarial-review · weigh-tradeoffs |
+| Security-sensitive diff (auth, input, API, DB, credentials) | security-review · threat-and-scale-check |
+| Trusting a review/scanner/test verdict on security-sensitive code | security-review-by-halo · honest-artifacts |
+| Review feedback received (human, PR, subagent report) | verify-before-agreeing · fresh-context-review |
 | Hard-to-reverse decision (schema, public API, migration) | adversarial-review · weigh-tradeoffs · record-the-why |
 | Running subagents / multiple agents | delegate-to-subagents · bite-sized-plan |
 | Choice other teams will likely copy | record-the-why · weigh-tradeoffs · interface-contracts |
