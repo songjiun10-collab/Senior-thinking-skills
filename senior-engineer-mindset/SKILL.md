@@ -53,6 +53,7 @@ In rough workflow order:
 | Execution discipline | `honest-artifacts` | Unverified labels, reproducibility, metric traps |
 | Execution discipline | `security-review` | OWASP-based review of security-sensitive diffs before they ship |
 | Execution discipline | `security-review-by-halo` | Trust the checking itself as a fallible monitor — independent evidence, stale verdicts, worst case, fail closed |
+| Execution discipline | `observability-and-instrumentation` | Make production behavior visible with useful logs, metrics, traces, and symptom-based alerts |
 | Look back | `fresh-context-review` | Strip your own assumptions and look at the result again |
 | Look back | `verify-before-claiming` | Actually run it before claiming it's done |
 | Look back | `verify-before-agreeing` | Evaluate review feedback technically before implementing it |
@@ -81,6 +82,7 @@ In rough workflow order:
 | Auth / permissions / safety mechanisms | threat-and-scale-check · adversarial-review · weigh-tradeoffs |
 | Security-sensitive diff (auth, input, API, DB, credentials) | security-review · threat-and-scale-check |
 | Trusting a review/scanner/test verdict on security-sensitive code | security-review-by-halo · honest-artifacts |
+| Shipping production behavior or adding telemetry | observability-and-instrumentation · verifiability-first |
 | Review feedback received (human, PR, subagent report) | verify-before-agreeing · fresh-context-review |
 | Hard-to-reverse decision (schema, public API, migration) | adversarial-review · weigh-tradeoffs · record-the-why |
 | Running subagents / multiple agents | delegate-to-subagents · bite-sized-plan |
