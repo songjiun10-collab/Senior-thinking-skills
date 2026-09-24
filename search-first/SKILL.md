@@ -31,3 +31,11 @@ Verify when the cost of checking is **cheaper than the cost of being wrong** —
 - **Executive angle (CTO/VP-Eng):** if the choice becomes the org-wide default, weigh license terms, vendor lock-in, and EOL/support timeline against staying flexible — a dependency the vendor could deprecate or reprice is a budget and continuity risk, not just an engineering pick.
 
 If what you found differs from memory, **record that fact** — the next person would otherwise make the same mistake.
+
+## Model notes
+
+- **Haiku 4.5** — set explicit thinking budget before comparing memory against docs, or the check stays surface-level.
+- **Sonnet 5** — default — apply as written.
+- **Opus 5** — do the doc lookup or version check directly rather than delegating to a subagent; a grep/fetch is usually faster than a dispatch.
+- **Opus 5.5** — set effort explicitly for anything beyond a well-known stable API, or the verification pass comes out shallow at default effort.
+- **Fable 5.1** — default — apply as written; long verification chains across many libraries are within its strength.

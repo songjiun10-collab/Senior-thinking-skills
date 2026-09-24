@@ -28,3 +28,11 @@ Thinking about how you'll verify something up front naturally improves the desig
 - Does verifying it really require a DB, network, time, or randomness? **Can that piece be isolated?**
 - Think of one failing case first — that's effectively your first test.
 - Multi-step work becomes **a plan with a verification step attached to each item**.
+
+## Model notes
+
+- **Haiku 4.5** — Thinking needs an explicit budget — without one it may skip straight to code instead of reasoning out the success criterion first.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Already self-verifies well once it's working — the leverage here is pinning the criterion *before* results exist, not adding extra re-checks after.
+- **Opus 5.5** — Same self-verification strength as Opus 5; effort defaults to medium, so set it explicitly when the criterion needs real deliberation (e.g. a benchmark threshold).
+- **Fable 5.1** — Runs long, low-visibility stretches on multi-step verification plans — ask for a status update per step if you want visibility before it's all done.

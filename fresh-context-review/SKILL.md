@@ -36,3 +36,11 @@ On a change to a shared interface, add a third lens: **who else calls this, and 
 ## No self-censoring
 
 Don't pre-filter findings before the review with "this is probably fine." Even something you think is a false positive goes on the list — judge it later. Pre-grading buries the real problems along with the noise.
+
+## Model notes
+
+- **Haiku 4.5** — Turn on explicit thinking (`budget_tokens`) for this pass — it won't allocate extra depth on its own.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Skip piling on extra "are you sure" re-verification passes beyond this skill's own steps; it already self-checks well, and prefer reading the diff directly over spinning up a subagent for it.
+- **Opus 5.5** — Set effort explicitly (its default is one notch lower than Opus 5's) or this review runs shallower than intended.
+- **Fable 5.1** — Ask it to narrate findings as it goes; it stays quiet by default during a long review pass.

@@ -27,3 +27,11 @@ What's requested and what's needed often differ. If the real problem behind "bui
 ## State Assumptions Explicitly
 
 Any blank filled in by guessing must be stated explicitly. "Proceeded assuming X" — one line now saves hours later.
+
+## Model notes
+
+- **Haiku 4.5** — 200K context leaves less room for exploratory reading; keep the clarifying pass itself short before it crowds out room for the actual work.
+- **Sonnet 5** — more literal than prior models — an ambiguous one-liner is more likely to be followed narrowly as typed, so "scope it broad, then confirm" matters more here, not less.
+- **Opus 5** — apply as written — no tier-specific adjustment for this skill.
+- **Opus 5.5** — apply as written — no tier-specific adjustment for this skill.
+- **Fable 5.1** — capable of quietly reasoning past an ambiguous request to its own best guess; still surface the branches per "Handling Ambiguity" rather than letting it resolve them silently.

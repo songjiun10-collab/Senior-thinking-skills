@@ -38,3 +38,11 @@ Three failure modes recur:
 | "Faster to just say fixed" | An unverified fix chases the reviewer's premise, right or wrong |
 | "Pushing back feels rude" | Pushback with evidence is the job; agreement without it is theater |
 | "Apply everything in one commit" | Mixing blocking items and nits makes both harder to verify and revert |
+
+## Model notes
+
+- **Haiku 4.5** — Thinking needs an explicit budget — without one it's more likely to pattern-match agreement than re-derive whether the claim holds.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Tends to delegate to a subagent even where a direct grep or file read would settle the claim faster — check the code yourself before spinning one up.
+- **Opus 5.5** — Same delegation tendency as Opus 5; effort defaults to medium, so set it explicitly when a review claim needs real investigation, not a quick read.
+- **Fable 5.1** — No tier-specific adjustment — apply as written.

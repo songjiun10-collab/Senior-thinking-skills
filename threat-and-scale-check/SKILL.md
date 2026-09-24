@@ -33,3 +33,11 @@ A structure where the next layer catches a failure is more realistic than bettin
 - If this safeguard fails, is it an immediate incident, or is there another layer behind it?
 - **Block unconscious mistakes, allow conscious choices, but leave a trace** — that's the shape of a good safeguard. Block everything and people route around it; allow everything and it becomes an incident.
 - Verify on success too. Don't stop at "it was blocked" — confirm **why** it was blocked, and whether that holds in other conditions.
+
+## Model notes
+
+- **Haiku 4.5** — No tier-specific adjustment — apply as written.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — No tier-specific adjustment — apply as written.
+- **Opus 5.5** — Broader safety classifiers (bio, reasoning_extraction join cyber) can trip on a legitimate security/permission review — a refusal here may be a false positive worth re-checking, not necessarily a real block.
+- **Fable 5.1** — Handles a long, full-codebase trust-boundary sweep well, but writes fewer progress updates — ask for status if you're watching it run.

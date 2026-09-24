@@ -47,3 +47,11 @@ python3 scripts/memory.py list                       # list every topic that has
 Files live under `.claude/memory/<topic>.md` by default (override with `MEMORY_DIR`). `show` is meant to run before starting a recurring task — read it the same way you'd read a reusable dispatch template before delegating. `append` is meant to run right after a correction, not batched up for later, or it doesn't get captured at all.
 
 This script only reads and appends — it never rewrites or deletes an existing line, so pruning a stale entry (see "Keeping it honest") is a manual edit, not something the script does for you silently.
+
+## Model notes
+
+- **Haiku 4.5** — With only a 200K window, keep memory files short and pruned aggressively — a bloated file crowds out actual task context faster here than on 1M-window tiers.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — No tier-specific adjustment — apply as written.
+- **Opus 5.5** — No tier-specific adjustment — apply as written.
+- **Fable 5.1** — No tier-specific adjustment — apply as written.

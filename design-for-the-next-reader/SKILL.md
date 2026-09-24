@@ -29,3 +29,11 @@ Write the implementation first and you get an API that's **easy to build**. Writ
 ## Label your shortcuts
 
 If you hardcoded something, took a temporary workaround, or traded correctness for performance, **write down that you did it and why.** Code left unexplained either gets left untouched out of fear, or deleted without a thought — both are wrong outcomes.
+
+## Model notes
+
+- **Haiku 4.5** — apply as written — no tier-specific adjustment for this skill.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — prone to over-engineering interfaces with unrequested flexibility; hold the "small interface hiding a lot of behavior" bar strictly and prefer the plainest shape that meets today's need.
+- **Opus 5.5** — same over-engineering instinct as Opus 5; watch for unneeded abstraction layers creeping into the interface design.
+- **Fable 5.1** — apply as written — no tier-specific adjustment for this skill.

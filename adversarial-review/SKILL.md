@@ -40,3 +40,11 @@ Any one of these makes it non-trivial:
 **Only stripped context makes it a real review.** Hand over the reasoning that led to the conclusion and you get a review that's been talked into that reasoning. Hand over only the output and its contract.
 
 **Decisions with wide blast radius need reviewers who don't share your stake in them.** A choice other teams will build interfaces on top of, or copy as precedent, deserves a reviewer who isn't invested in your original reasoning being right — self-review from inside the same context tends to confirm rather than disprove.
+
+## Model notes
+
+- **Haiku 4.5** — thinking needs an explicit budget for a real adversarial pass; default depth won't do it on its own.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — already self-verifies well; skip stacking extra "double-check" instructions on top of the Disprove step, it's redundant.
+- **Opus 5.5** — thinking is always on but defaults to medium effort; set it explicitly higher for a review meant to actually stress-test a claim.
+- **Fable 5.1** — narrates fewer updates between passes by default; ask it to report each of the 3 passes if you need visibility into where a claim broke down.

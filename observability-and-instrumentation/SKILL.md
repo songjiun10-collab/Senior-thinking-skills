@@ -67,3 +67,11 @@ Instrumentation is code and can be wrong. Before calling it complete:
 ## Verification gate
 
 Do not claim observability is complete until the questions are written, every signal maps to one, actual output is redacted and correlated, metric cardinality is bounded, traces cross the relevant boundaries, and an induced failure was found through telemetry.
+
+## Model notes
+
+- **Haiku 4.5** — With only a 200K window, don't dump raw log/trace/metric samples into context to verify telemetry — read bounded slices or grep for the fields you're checking.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Don't over-verify beyond the checklist's own steps — it already checks its work; extra confirmation passes here just add latency.
+- **Opus 5.5** — Set effort explicitly when tracing a hard-to-explain incident through telemetry — its default effort is lower than Opus 5's.
+- **Fable 5.1** — Ask it to narrate what it's checking during the verification gate — it tends to go quiet through a long multi-step check otherwise.

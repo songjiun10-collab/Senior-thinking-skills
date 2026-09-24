@@ -50,3 +50,11 @@ Isolated directories, not one shared root plan: `.planning/YYYY-MM-DD-slug/` wit
 | "Basically done" (2 of 5 boxes checked) | The boxes are the gate, not a feeling |
 | "I'll write the findings down at the end" | A finding not on disk when discovered gets re-derived or lost |
 | "One shared plan file is fine for two agents" | They overwrite each other's phases |
+
+## Model notes
+
+- **Haiku 4.5** — With only a 200K window, this pattern matters more here than elsewhere — recite the plan from disk more often, since irrelevant context gets crowded out sooner.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — No tier-specific adjustment — apply as written.
+- **Opus 5.5** — No tier-specific adjustment — apply as written.
+- **Fable 5.1** — Write `task_plan.md` as goals and phases, not a prescriptive step list — its own reasoning per phase tends to exceed a human-scripted sequence; it also handles long-horizon runs between check-ins well, so the plan file matters more for resumability than for step-by-step direction.

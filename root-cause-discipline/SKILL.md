@@ -127,3 +127,11 @@ These phrases mean the approach is wrong. Stop and go back to step 1.
 | "It's a simple problem, skip the process" | Simple bugs have root causes too. If it's simple, the process finishes fast |
 | "No time for process, this is urgent" | Systematic debugging is **faster** than guess-and-check |
 | "Let's try this first, investigate after" | The first fix sets the pattern. Do it right from the start |
+
+## Model notes
+
+- **Haiku 4.5** — set explicit thinking budget before step 0; without it, the "is this already solved" check gets skipped in favor of jumping straight to a fix.
+- **Sonnet 5** — default — apply as written.
+- **Opus 5** — for step 0, do the direct grep/git-log check yourself before reaching for a subagent — it's usually faster than delegating.
+- **Opus 5.5** — a refusal mid-investigation (e.g. on security-adjacent bugs) may be a broader-classifier false positive, not evidence the code is unsafe — distinguish before backing off.
+- **Fable 5.1** — give the investigation goal, not a scripted step-by-step order — its own root-cause reasoning tends to outperform a prescribed sequence.

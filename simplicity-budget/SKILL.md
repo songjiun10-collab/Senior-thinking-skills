@@ -30,3 +30,11 @@ Abstractions, config options, extension points added "in case it's needed later"
 ## Simple ≠ disposable
 
 Even a one-off analysis or script, if it produced a real result, **gets saved as a file.** Simple and unabstracted is fine — living only in shell history or `/tmp` means the next person has to rebuild it from scratch.
+
+## Model notes
+
+- **Haiku 4.5** — set explicit thinking budget before the complexity check, or it tends to accept the first structure without questioning it.
+- **Sonnet 5** — default — apply as written.
+- **Opus 5** — over-engineers by default (extra files, unneeded abstractions, unrequested flexibility) — apply this skill harder here, and ask explicitly for brevity since response length doesn't shrink on its own.
+- **Opus 5.5** — same over-engineering tendency as Opus 5, plus its higher default effort can add unrequested robustness — set effort deliberately and still apply the budget explicitly.
+- **Fable 5.1** — give the size/complexity constraint as a general instruction rather than a prescriptive line-count plan — it tends to right-size on its own better than a scripted target.

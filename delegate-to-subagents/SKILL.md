@@ -166,3 +166,11 @@ Optionally wire it as a `PreToolUse` hook on the `Agent` tool so a stale-blocked
 ```
 
 This can sit in the same `PreToolUse`/`Agent` matcher block as `check_dispatch_brief.py` above — Claude Code runs every hook command listed under a matcher, in order. State lives in its own file (`.claude/hooks/.execution_manager_state.json` by default, override with `EXECUTION_MANAGER_STATE_FILE`), separate from `check_dispatch_brief.py`'s marker files, so the two don't interfere with each other. Verified with 13 isolated stdin/CLI cases (empty dashboard, start/update/clear, unknown-status rejection, hook mode silent when nothing's stale, hook mode warning once staleness is simulated, PostToolUse and non-Agent calls both silent, malformed stdin fails open, multiple workers with mixed states).
+
+## Model notes
+
+- **Haiku 4.5** — workers at this tier need an explicit thinking budget, not adaptive depth; factor that into "pick the worker's model tier by subtask difficulty."
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — already covered above ("Opus-class models delegate more eagerly"); lean on the "decide whether to delegate first" check rather than the model's own instinct.
+- **Opus 5.5** — same eager-delegation tendency as Opus 5; no further adjustment beyond what's noted above.
+- **Fable 5.1** — reports fewer intermediate updates during long delegated runs; brief it explicitly to write status to a file per "Give long-running work a name and a status line" if visibility matters.

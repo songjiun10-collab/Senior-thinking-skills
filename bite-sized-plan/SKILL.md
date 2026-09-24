@@ -60,3 +60,11 @@ If a plan spans several independent subsystems, **split the plan.** Each plan sh
 | "This task is big but let's keep it as one chunk" | If you can't test it in one shot, it isn't one task |
 | "File layout can wait" | Decomposition decisions are expensive to reverse. Sketch them first |
 | "Writing out steps is overkill" | Not for the next person (or you, next session) |
+
+## Model notes
+
+- **Haiku 4.5** — 200K context caps how much stays loaded while planning; keep the plan doc itself minimal and offload detail to files.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — watch step 1 for over-splitting into more files than the task needs; "one responsibility per file" is a floor, not a target to maximize.
+- **Opus 5.5** — apply as written — no tier-specific adjustment for how a plan should be sized.
+- **Fable 5.1** — prescriptive step-by-step plans (section 3) tend to underperform its own reasoning; keep task-level scoping (sections 1-2) but leave step sequencing looser for it.

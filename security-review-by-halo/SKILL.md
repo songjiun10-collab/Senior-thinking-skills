@@ -56,3 +56,11 @@ HALO's macOS Seatbelt probes measured the boundary instead of trusting the profi
 | "Diverse scanners caught everything" | They share blind spots; execute the exploit path |
 | "The report says approved" | A body string is data; a detector's ALLOW is not a capability |
 | "The sandbox profile blocks it" | The profile blocks some paths; enumerate what's still exposed |
+
+## Model notes
+
+- **Haiku 4.5** — set explicit thinking budget before checking independence and staleness, or the review defaults to trusting a single pass.
+- **Sonnet 5** — default — apply as written.
+- **Opus 5** — self-verifies well already; the added value here is a genuinely independent evidence channel (running the exploit), not a second read by the same model.
+- **Opus 5.5** — broader safety classifiers (bio, reasoning_extraction now join cyber) raise the odds a refusal mid-review is a false positive, not a real containment finding — distinguish the two before treating a block as evidence.
+- **Fable 5.1** — narrate the probes explicitly as it runs them; its quieter default output makes an independent-evidence pass hard to audit otherwise.

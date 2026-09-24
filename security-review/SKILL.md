@@ -47,3 +47,11 @@ Walk the diff against the recurring failure classes (OWASP Top 10, condensed to 
 | "It's an internal endpoint" | Internal becomes public; the check is cheap now |
 | "I'll sanitize the input later" | "Later" is the vulnerability |
 | "The framework handles it" | Only if you didn't bypass it |
+
+## Model notes
+
+- **Haiku 4.5** — set explicit thinking budget before walking the checklist, or the review skims instead of tracing each item.
+- **Sonnet 5** — default — apply as written.
+- **Opus 5** — already verifies its own findings well; skip extra "are you sure" re-checks and spend the budget running the actual exploit path instead.
+- **Opus 5.5** — broader safety classifiers (bio, reasoning_extraction, cyber) mean a refusal mid-review may be a false positive on legitimate security work, not a real finding — check before concluding the code is unsafe.
+- **Fable 5.1** — ask it to narrate what it's checking as it goes; it writes fewer progress updates by default, and a security review benefits from visible reasoning.

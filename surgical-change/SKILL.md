@@ -69,3 +69,11 @@ Label findings as required vs. optional. Skip the labels and minor points get tr
 ## Don't accept "I'll clean it up later"
 
 In practice, deferred cleanup mostly never happens. Either require it in this change, or if it's genuinely urgent, file a separate issue **with an owner assigned to it.**
+
+## Model notes
+
+- **Haiku 4.5** — Smaller context window means a growing diff falls out of view faster — split changes early rather than relying on it to track the whole file.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Tends to over-engineer by default (extra files, unrequested abstractions) — this skill's "nothing outside the request" rule is the direct counter; hold the line explicitly.
+- **Opus 5.5** — Same over-engineering tendency as Opus 5, and effort defaults to medium — set it explicitly for a real refactor so the fence-check and blast-radius audit actually happen.
+- **Fable 5.1** — Writes fewer progress updates during long agentic edits — ask it to narrate which files it's touching so a growing diff doesn't go unnoticed until the end.

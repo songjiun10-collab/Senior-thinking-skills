@@ -28,3 +28,11 @@ Code that fails silently is far more dangerous than code that fails loudly.
 - Are you swallowing exceptions? (`except: pass`, an empty catch block)
 - Does the error message actually help find the cause? Does it include **which value** was the problem?
 - Is there a path that fails but looks like success? (partial success, an empty result returned as if complete)
+
+## Model notes
+
+- **Haiku 4.5** — set explicit thinking `budget_tokens` before running the premortem, or it won't allocate extra depth on its own.
+- **Sonnet 5** — spell out which failure categories to walk (I/O, concurrency, persisted state) — underspecified prompts get followed literally, not generously filled in.
+- **Opus 5** — self-verification is already strong; skip "double-check this list" instructions, they just add latency without catching more.
+- **Opus 5.5** — set effort explicitly (default is `medium`); a real premortem on I/O or concurrency needs higher effort than default.
+- **Fable 5.1** — give the failure-mode categories as general instructions, not a scripted checklist to fill in order — its own reasoning covers more ground than a prescriptive script.

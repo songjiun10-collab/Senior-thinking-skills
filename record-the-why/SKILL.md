@@ -28,3 +28,11 @@ Skip it where the code explains itself (naming, function decomposition already d
 
 - When a decision changes, don't delete and rewrite the old record — **overturn it with a new one.** Why it changed is itself information a future reader (or another team hitting the same tradeoff) needs.
 - "I'll clean it up later" means the context at that moment — why this was the best call then — is gone for good. Right after the decision is the cheapest time to write it down.
+
+## Model notes
+
+- **Haiku 4.5** — set explicit thinking budget before weighing alternatives, or the comparison stays shallow by default.
+- **Sonnet 5** — default — apply as written.
+- **Opus 5** — writes a solid ADR unprompted; don't add "double-check your reasoning" instructions on top, they just cost tokens.
+- **Opus 5.5** — set effort explicitly for anything beyond a trivial decision, or the record comes out thinner than intended.
+- **Fable 5.1** — describe what the ADR needs to capture (decision, rejected alternatives, reasoning) rather than a fill-in-the-blank template — it reasons through the tradeoffs better on its own.

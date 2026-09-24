@@ -68,3 +68,11 @@ Skip any step and it's not verification — it's a guess.
 ## Scope
 
 Applies to **every phrasing that implies** success or completion — not just the exact words, but rephrasings and implications too. The more consumers or teams will build on this claim, the more of them the verification needs to actually cover — a green local suite proves your code works, not that every downstream caller still does. **Distinguished/Fellow angle:** when the claim underwrites a multi-year, company-wide bet — a default other orgs adopt, a primitive that gets open-sourced or shows up in a conference talk — the evidence has to be reproducible from scratch by someone with zero institutional memory, not just trusted because the person who ran it is still around to vouch for it. **Executive angle (CTO/VP-Eng):** when the claim is said to a board, regulator, or customer — "we're compliant," "the incident is contained," "we can hold this SLA" — it stops being a technical statement and becomes a contractual or legal one, so verify it against that bar before it's said out loud, because walking it back costs a contract or a headline, not a revert. If you can't run the verification, say so — "haven't run the tests yet" beats "should work."
+
+## Model notes
+
+- **Haiku 4.5** — Thinking needs an explicit budget — without one it may assert a claim without actually reasoning through whether the evidence supports it.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Already self-checks its own reasoning well internally, but that's not a substitute for this skill's rule — running the actual command and reading its output is still required, not skippable because it "already checked."
+- **Opus 5.5** — Same internal self-checking as Opus 5, still no substitute for running the command; effort defaults to medium, so set it explicitly for a high-stakes claim (shared interface, regression test).
+- **Fable 5.1** — Writes fewer intermediate updates — have it state the command it ran and what the output showed, not just the conclusion.

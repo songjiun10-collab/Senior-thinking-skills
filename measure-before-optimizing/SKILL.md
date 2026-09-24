@@ -28,3 +28,11 @@ If you measured and the bottleneck is negligible against the overall path, it's 
 - If the hot path sits inside a shared library or service other teams call, weigh the fix against **their** traffic profile too, not just your one call site — a change that helps your caller can quietly regress someone else's.
 - **Distinguished/Fellow angle:** A technique that earns its place here and could become the org's default (or get open-sourced, blogged about, or presented externally) needs evidence that holds beyond this one workload — a multi-year bet on a benchmark from a single call site is how false optimizations become doctrine.
 - **Executive angle (CTO/VP-Eng):** Before a fix that adds infrastructure (bigger instances, a caching layer, a new managed service) ships as the default, weigh its recurring bill against the engineer-hours it saves — that's the number a CFO asks for before approving the spend increase.
+
+## Model notes
+
+- **Haiku 4.5** — Explicitly instruct it to profile/measure first — without an explicit push to think it further, it's more likely to jump straight to a fix.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Don't let it reach for a subagent to run the profiler when a direct measurement in the current session would be faster.
+- **Opus 5.5** — No tier-specific adjustment — apply as written.
+- **Fable 5.1** — No tier-specific adjustment — apply as written.

@@ -34,3 +34,11 @@ Judge whether the reason still holds:
 - "I don't know why this is here, but it looks unused, so delete it" — whether it's really unused usually needs **outside** confirmation (search callers, production logs, other services)
 - "This is the old way, probably not needed anymore" — that's an unverified guess. Confirm it with `search-first` or `root-cause-discipline`
 - Found unrelated dead code? **Mention it, don't delete it.** That's out of scope for this task (see `surgical-change`)
+
+## Model notes
+
+- **Haiku 4.5** — 200K context may not hold a large fence's full call-site and blame history; pull only what's needed to answer the questions above.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — apply as written — no tier-specific adjustment for this skill.
+- **Opus 5.5** — a refusal while investigating auth checks or permission gates may be a broader-classifier false positive, not necessarily a real block — worth a retry.
+- **Fable 5.1** — handles long investigation chains (blame, cross-service tracing) well in one turn, but ask it to report progress explicitly if you want visibility before it reaches a verdict.

@@ -36,3 +36,11 @@ Run through these quickly, in your head. One line each is enough — don't force
 ## Output
 
 **Don't list all 12.** Divergence mostly happens in your head — show the user only the narrowed 2-3 and why they were chosen. The idea list itself has no value to the user.
+
+## Model notes
+
+- **Haiku 4.5** — Thinking needs an explicit budget — without one it's more likely to anchor on the first idea than actually run the divergence step.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — No tier-specific adjustment — apply as written.
+- **Opus 5.5** — Effort defaults to medium — set it explicitly before an irreversible decision so divergence actually happens instead of being skipped for speed.
+- **Fable 5.1** — Give it the problem and constraints as a general prompt rather than walking it through the 12-axis checklist — it tends to explore the space well on its own.

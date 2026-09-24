@@ -31,3 +31,11 @@ Anything pasted into the conversation occupies space for the rest of the session
 ## Pointers, Not Summaries
 
 Instead of filling context with "this file has A, B, C," leave **where to look**. Summaries go stale; sources don't.
+
+## Model notes
+
+- **Haiku 4.5** — 200K is the smallest window in the lineup; "hand off files, not text" matters more here since a bad paste leaves less room to recover.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — apply as written — no tier-specific adjustment for this skill.
+- **Opus 5.5** — apply as written — no tier-specific adjustment for this skill.
+- **Fable 5.1** — reports fewer intermediate updates during long handoffs; pin decisions to a file as this skill says, since there's less in-conversation commentary to fall back on.

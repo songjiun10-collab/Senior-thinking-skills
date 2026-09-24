@@ -33,3 +33,11 @@ Optimize a score long enough and the score improves while the actual goal drifts
 - Is the sample size big enough? If not, a **conservative choice** beats a complex one with a marginally better score
 - Did anything get worse while this metric improved? (a hidden tradeoff — speed up, accuracy down)
 - **"It got better" is not a result.** Give the number.
+
+## Model notes
+
+- **Haiku 4.5** — Explicitly instruct it to investigate/verify before reporting a number — it won't decide on its own to think longer first.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — Its own self-verification is already solid; don't stack redundant "double-check this number" instructions on top, that's wasted tokens, not more honesty.
+- **Opus 5.5** — Set effort explicitly for any claim that needs real verification depth; its default effort is lower than Opus 5's.
+- **Fable 5.1** — Ask it to report unverified attempts and dead ends explicitly — it may not surface them unprompted in its quieter update style.

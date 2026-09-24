@@ -38,3 +38,11 @@ Never make consumers choose between multiple versions of the same dependency or 
 - Principal angle: for a widely-consumed interface, a breaking change isn't just a code diff — it's a migration you're imposing on every team downstream. Weigh a deprecation window and a communicated migration path as part of the design, not as cleanup after the fact.
 - Distinguished/Fellow angle: if this becomes the pattern every service in the company copies, the real question is whether other teams can operate it correctly five years out without you personally there to explain the edge cases.
 - Executive angle (CTO/VP-Eng): a promise baked into a public interface is a standing support and liability cost — weigh what it takes to keep honoring it (or the customer/contractual fallout of breaking it) against the convenience of shipping it now.
+
+## Model notes
+
+- **Haiku 4.5** — No tier-specific adjustment — apply as written.
+- **Sonnet 5** — Default — apply as written; being more literal than prior generations, spell out contract guarantees (idempotency, error shape) explicitly rather than relying on it to infer them.
+- **Opus 5** — Resist adding unrequested flexibility (extra config knobs, generic abstractions) to the interface beyond what the contract calls for.
+- **Opus 5.5** — No tier-specific adjustment — apply as written.
+- **Fable 5.1** — Give it the contract as a general spec rather than a prescriptive step-by-step design walkthrough — its own reasoning on interface tradeoffs tends to exceed a scripted one.

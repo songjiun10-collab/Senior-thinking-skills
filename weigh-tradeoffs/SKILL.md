@@ -28,3 +28,11 @@ Confirmation follows the same tier: reversible → just do it; irreversible → 
 - Leave **one or two sentences** on why this was chosen — in a code comment, commit message, or design note.
 - It should answer "why did we do it this way?" six months from now. If it can't, the next person just rips it out.
 - **Record the rejected alternatives too.** Without knowing why they weren't used, the next person walks down the same path again.
+
+## Model notes
+
+- **Haiku 4.5** — Thinking needs an explicit budget — without one it's more likely to lock onto the first option than actually lay out 2-3 alternatives.
+- **Sonnet 5** — Default — apply as written.
+- **Opus 5** — No tier-specific adjustment — apply as written.
+- **Opus 5.5** — Effort defaults to medium — set it explicitly for a hard-to-reverse decision so the comparison gets real depth instead of a token pass.
+- **Fable 5.1** — State the decision and constraints as a goal rather than a prescriptive list of alternatives to check — it reasons through the tradeoff space well on its own.
