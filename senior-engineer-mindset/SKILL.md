@@ -138,6 +138,20 @@ Principal/Distinguished angle: when **delegating to a subagent** (`delegate-to-s
 
 Don't re-litigate this per message — settle it once per task from the track classification above, and only revisit if the track itself escalates.
 
+### Known per-model tendencies (from Anthropic's own prompting guidance)
+
+Anthropic's model-specific prompting docs name concrete behavioral quirks per tier — not just capability differences. Where this bundle's disciplines exist specifically to counter one, it's called out below so the router recognizes it's correcting a documented tendency, not a hypothetical:
+
+| Tendency (as documented) | Model(s) | This bundle's counter |
+|---|---|---|
+| Over-engineers by default — extra files, unrequested abstractions, unasked-for flexibility | Opus 4.5 / 4.6-class | `simplicity-budget` and `surgical-change` aren't optional nice-to-haves on this tier — pull them by default, not just when a task looks complex |
+| Spawns subagents even when a direct action (a single grep, one file read) would be faster; Opus 5 delegates more eagerly than earlier models | Opus-class generally | Run `delegate-to-subagents`'s "Decide whether to delegate first" check before dispatching — the default instinct to delegate needs a reason, not just a hunch |
+| Already self-verifies well; extra verification instructions carried over from older-model prompts cause *over*-verification (wasted tokens/latency), not more correctness | Opus 5 specifically | Don't stack redundant "double-check your answer" instructions on top of what this bundle already asks for — `verify-before-claiming`'s evidence gate (run the actual command) is not the same thing as internal re-verification and stays as-is regardless of tier |
+| Writes fewer user-facing updates between tool calls in long agentic loops — quiet by default | Fable 5.1 / Mythos 5.1-class | If visibility into a long `delegate-to-subagents` run matters, ask for progress updates explicitly — this tier won't volunteer them the way older tiers did |
+| Can take destructive or hard-to-reverse actions (force-push, deleting files, posting externally) without pausing to check, absent guidance | Opus 4.6-class and later, undirected | This is exactly what the "Executing actions with care" default (see the harness system prompt) and this router's hard-to-reverse check-in exist for — treat that guidance as load-bearing on this tier, not boilerplate |
+
+Source: Anthropic's [Claude prompting best practices — model-specific guidance](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#model-specific-guidance). Re-check that page when a new model ships — these are per-generation behavioral notes, not fixed properties of "Opus" or "Sonnet" as a brand.
+
 ## Output format (medium-to-large tasks)
 
 ```markdown
