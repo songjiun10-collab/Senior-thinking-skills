@@ -128,10 +128,14 @@ These phrases mean the approach is wrong. Stop and go back to step 1.
 | "No time for process, this is urgent" | Systematic debugging is **faster** than guess-and-check |
 | "Let's try this first, investigate after" | The first fix sets the pattern. Do it right from the start |
 
-## Model notes
+## Which file to use
 
-- **Haiku 4.5** — set explicit thinking budget before step 0; without it, the "is this already solved" check gets skipped in favor of jumping straight to a fix.
-- **Sonnet 5** — default — apply as written.
-- **Opus 5** — for step 0, do the direct grep/git-log check yourself before reaching for a subagent — it's usually faster than delegating.
-- **Opus 5.5** — a refusal mid-investigation (e.g. on security-adjacent bugs) may be a broader-classifier false positive, not evidence the code is unsafe — distinguish before backing off.
-- **Fable 5.1** — give the investigation goal, not a scripted step-by-step order — its own root-cause reasoning tends to outperform a prescribed sequence.
+This skill is tuned per model. Pick the file matching the model actually running:
+
+| Model | File |
+|---|---|
+| Claude Opus 5.5 | `opus-5-5.md` |
+| Claude Fable 5.1 | `fable-5-1.md` |
+| Claude Sonnet 5 | `sonnet-5.md` |
+
+Read the file matching the model currently running before applying this skill.

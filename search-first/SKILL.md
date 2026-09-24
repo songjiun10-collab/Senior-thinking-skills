@@ -32,10 +32,14 @@ Verify when the cost of checking is **cheaper than the cost of being wrong** —
 
 If what you found differs from memory, **record that fact** — the next person would otherwise make the same mistake.
 
-## Model notes
+## Which file to use
 
-- **Haiku 4.5** — set explicit thinking budget before comparing memory against docs, or the check stays surface-level.
-- **Sonnet 5** — default — apply as written.
-- **Opus 5** — do the doc lookup or version check directly rather than delegating to a subagent; a grep/fetch is usually faster than a dispatch.
-- **Opus 5.5** — set effort explicitly for anything beyond a well-known stable API, or the verification pass comes out shallow at default effort.
-- **Fable 5.1** — default — apply as written; long verification chains across many libraries are within its strength.
+This skill is tuned per model. Pick the file matching the model actually running:
+
+| Model | File |
+|---|---|
+| Claude Opus 5.5 | `opus-5-5.md` |
+| Claude Fable 5.1 | `fable-5-1.md` |
+| Claude Sonnet 5 | `sonnet-5.md` |
+
+Read the file matching the model currently running before applying this skill.
