@@ -123,6 +123,21 @@ Only the **format** changes per track:
 - **Bounded** — a 3-5 bullet design note. Pull only the disciplines that actually apply.
 - **Structural** — write it up in the format below, then hand off to `bite-sized-plan`.
 
+## Model-aware calibration
+
+Track and format above are set by the *task*. This is set by the *model actually running the router* — per Anthropic's own model docs, tiers differ enough in context window and thinking behavior that the same track deserves a different amount of hand-holding:
+
+| Model tier | Context window | Thinking | Calibration |
+|---|---|---|---|
+| Haiku-class (fastest, cheapest) | 200K — the smallest of the current lineup | explicit, fixed thinking budget (not adaptive) | Keep it to Spike/Bounded work and narrow subagent legs. Don't rely on it filling gaps from an under-specified request — write the steps out. Budget context tightly (`context-economy`) since the window is ~5x smaller than the rest of the lineup, and lean harder on `verify-before-claiming` between steps. |
+| Sonnet-class (mid-tier) | 1M | adaptive by default | The default workhorse for Bounded and most Structural work. No special downgrade needed; run the router normally. |
+| Opus-class (flagship) | 1M | adaptive, with explicit effort control (low → max) | Worth the extra cost specifically on hard-to-reverse or ambiguous calls — raise effort/thinking for `weigh-tradeoffs`, `premortem`, and `adversarial-review` rather than for mechanical edits. Effort is a lever to spend deliberately, not a default to max out. |
+| Highest-capability tier (long-horizon agentic) | 1M | always on, not optional | Reserve for genuinely long-running Structural/Executive-lens work — multi-stage delegation, an unattended `delegate-to-subagents` run, a decision with company-wide blast radius. Costs the most per token; using it for Spike/Bounded work is waste the router should flag, not default to. |
+
+Principal/Distinguished angle: when **delegating to a subagent** (`delegate-to-subagents`), this same table applies to picking the *worker's* model — a narrow, mechanical subtask (grep-and-report, a single well-specified file edit) doesn't need the flagship tier just because the controller happens to be running on it; match the worker's tier to the subtask's actual difficulty, not to the parent's.
+
+Don't re-litigate this per message — settle it once per task from the track classification above, and only revisit if the track itself escalates.
+
 ## Output format (medium-to-large tasks)
 
 ```markdown
