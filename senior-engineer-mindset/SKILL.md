@@ -15,6 +15,8 @@ The gap between junior and senior isn't "how well you write code" — it's **wha
 
 Read the file matching the model actually running before applying this skill. Each file is a complete, standalone rewrite covering the four-lens framing, the sub-skill and situational-pick tables, track classification, the "too simple to need a check" trap, output format, and the skip list — calibrated for that model. The hook below is not model-dependent and applies the same way regardless of which file you read.
 
+**Running something else** (Haiku, an older Opus/Sonnet/Fable generation, or a non-Claude agent that installed this skill bundle)? None of the three files above is tuned for you, but `sonnet-5.md` carries the full underlying procedure with the fewest model-specific assumptions layered on — read that one as the general-purpose default rather than skipping this skill.
+
 ## Optional: enforce with a hook
 
 The rule that a hard-to-reverse decision gets a check-in first is mechanically catchable to a degree: `scripts/check_ask_before_hard_change.py` watches for an Edit/Write/MultiEdit targeting a path that looks like a hard-to-reverse surface (schema, migration, public API spec, dependency manifest) with no `AskUserQuestion` call in the recent window (`ASK_HOOK_WINDOW_SECONDS`, default 1800s). By default it **only warns, it doesn't block** — set `ASK_HOOK_STRICT=1` to make a hit actually block the edit.

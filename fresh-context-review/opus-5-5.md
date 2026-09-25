@@ -1,5 +1,8 @@
 > Tuned for Claude Opus 5.5. See SKILL.md for the model index.
 
+
+> **On "set/raise effort" below:** effort is a request-level setting the caller (harness, API request config) fixes before generation starts — nothing inside a running turn can raise its own effort. Read every "set effort explicitly" or "raise effort" instruction in this file as: **say so explicitly** — in a design note, a flag to the user, or a request to reconfigure — and set it yourself if you or your harness controls that setting for the *next* request. It is not something to silently apply mid-turn.
+
 # Review With Fresh Eyes
 
 > **Difference from `adversarial-review`**: this is a post-hoc pass over **finished work**. `adversarial-review` interrogates an **in-flight decision** with a disproving bias, while reversing it is still cheap. If an irreversible decision is on the line, reach for `adversarial-review` before the work is done, not after.
@@ -11,7 +14,7 @@ Review code with the same context you wrote it in, and you carry the same blind 
 - **Look only at the result.** Set aside why it turned out this way; read only the diff and the final code.
 - Ask the questions a first-time reader would ask: when is this variable null? What does this function return? Why is this condition here?
 - **Go back to the original requirement and check against it.** Is what you built what was asked for? Did it drift along the way?
-- Do this pass yourself, directly, by reading the diff — don't reach for a subagent to do a plain diff read for you. Delegation has a real pull here, including for legs a direct read would settle just as fast; a fresh-eyes review of your own recent work is exactly the kind of task where reading it yourself is both faster and no less thorough.
+- **For a small, low-stakes change**, it's fine to do this pass yourself in the current conversation rather than reflexively delegating a plain diff read — the delegation pull is real on this tier, and not every review needs a fresh context to be worth doing. But for anything nontrivial, reading your own diff in the same context you wrote it in doesn't actually shed the blind spots this skill exists to counter — you still know why you wrote it that way. Hand it to a fresh-context subagent, or a genuinely new session, instead. That's the one case where the subagent isn't optional: the point of this pass is context you don't currently have, and self-review from the same transcript tends to confirm rather than disprove (see `adversarial-review`).
 
 ## Two separate axes
 

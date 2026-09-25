@@ -14,3 +14,5 @@ This skill's guidance is calibrated per model. Read the file matching the model 
 | Claude Sonnet 5 | `sonnet-5.md` |
 
 Read whichever file matches the model actually running before applying this skill.
+
+**Running something else** (Haiku, an older Opus/Sonnet/Fable generation, or a non-Claude agent that installed this skill bundle)? None of the three files above is tuned for you, but `sonnet-5.md` carries the full underlying procedure with the fewest model-specific assumptions layered on — read that one as the general-purpose default rather than skipping this skill.

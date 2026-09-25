@@ -16,6 +16,8 @@ The judgment call — when to persist something, what to write, how much — is 
 
 Read the file matching the model actually running before applying this skill.
 
+**Running something else** (Haiku, an older Opus/Sonnet/Fable generation, or a non-Claude agent that installed this skill bundle)? None of the three files above is tuned for you, but `sonnet-5.md` carries the full underlying procedure with the fewest model-specific assumptions layered on — read that one as the general-purpose default rather than skipping this skill.
+
 ## The script
 
 `scripts/memory.py` gives you a plain-text-in, plain-text-out CLI over one memory file per topic — no database, no format to learn. This mechanism is the same regardless of which model is running:

@@ -16,7 +16,7 @@ findings.md    → research notes and decisions, appended as you go
 progress.md    → session log and test results
 ```
 
-- `task_plan.md` is the resume point — phases with checkboxes and the goal each phase serves, current phase marked `in_progress`. Write each phase as a goal and its constraints, not a prescriptive step-by-step script — your own reasoning within a phase tends to exceed what a human would think to specify up front, and you handle long stretches of autonomous work between check-ins well, so the plan file earns its keep as the resumability anchor more than as a moment-by-moment script.
+- `task_plan.md` is the resume point — phases with checkboxes and the goal each phase serves, current phase marked `in_progress`. Because this is specifically the thing a *fresh context* reads after `/clear`, compaction, or a crash, write enough into each phase (concrete files, the check that proves it's done, the order that matters) that a session with none of the current reasoning can pick it up without re-deriving judgment calls — a bare goal statement asks the resuming context to reconstruct exactly what this pattern exists to avoid losing. Where this model's own step-by-step reasoning genuinely exceeds a pre-scripted sequence is *live, in the session that's actively executing the phase* — it's fine to deviate from the written detail there when you have a concrete reason to, but that's a live judgment call layered on top of a concrete plan, not a reason to write the plan itself at the goal level only.
 - `findings.md` is **appended, never rewritten from memory** — a finding only exists once it's on disk
 - `progress.md` logs what was run and what came back, so a crashed session resumes at the last known state, not at zero
 
@@ -52,4 +52,4 @@ Isolated directories, not one shared root plan: `.planning/YYYY-MM-DD-slug/` wit
 
 ## Calibration notes
 
-- This pattern is specifically suited to how you tend to work: long autonomous stretches between check-ins, plans framed as goals rather than scripts. Lean into that — write `task_plan.md` at the goal/constraint level and trust the phase-by-phase execution to your own reasoning, while leaning harder on `progress.md` as the place explicit status actually gets recorded, since it won't happen much in the live conversation otherwise.
+- This pattern is specifically suited to how you tend to work: long autonomous stretches between check-ins, and strong step-by-step reasoning once a phase is underway. Lean into that for *live execution* — trust your own reasoning to work out the moment-by-moment sequence within a phase rather than needing it pre-scripted. But keep writing `task_plan.md` itself with concrete enough detail per phase to survive a handoff to a context with none of that reasoning (see above) — and lean harder on `progress.md` as the place explicit status actually gets recorded, since it won't happen much in the live conversation otherwise.

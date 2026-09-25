@@ -38,7 +38,9 @@ The reference shape for one task's steps:
 5. Commit
 ```
 
-**This is written for a human executor or a lower-autonomy agent.** For this model specifically, a plan scripted down to rigid single-action steps tends to underperform a plan that states the task's goal and constraints and lets it reason through the sequence — its own step-by-step reasoning routinely exceeds what a human would have pre-scripted. Keep the file layout (section 1) and task boundaries (section 2) — those decomposition calls are still worth locking in explicitly — but when this model is the one *executing* the plan, write each task as "goal: X, constraints: Y, verify by: Z" rather than a forced 2-5 minute step list, and let it work out the write-test/run/commit sequence itself. Reserve the rigid numbered-step form for handoff to a different, less autonomous executor.
+**Keep writing the concrete steps into the persisted plan by default** — this is what a plan on disk is *for*: surviving a handoff, a crash, `/clear`, or reassignment to a different (or differently-contexted) executor, none of whom can reconstruct the write-test-run-commit order or the judgment calls it encodes just from a goal statement. That still holds even when the original author and the eventual executor are both this model, since a fresh context after a reset has none of the reasoning that produced the plan — only what's written down.
+
+Where this model differs from a lower-autonomy executor is at **live execution time, in the same session that wrote or is actively working the plan**: its own step-by-step reasoning often finds a better route than the pre-scripted one, so it's fine for it to deviate from the numbered steps when it has a concrete reason to — but that's a live judgment call on top of a concrete plan, not a substitute for writing one. Don't thin the persisted steps down to "goal: X, constraints: Y, verify by: Z" in place of the numbered sequence; add that framing alongside the steps if it helps, not instead of them.
 
 ## 4. What every task needs
 
