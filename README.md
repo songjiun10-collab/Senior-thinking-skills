@@ -77,6 +77,10 @@ All three are valid:
 - Each skill's `description` carries **when to fire**. The body carries **what to do**, nothing else
 - Scale-adjustment is the router's job. Writing a design memo for a single function is a failure
 
+## Related
+
+This bundle is the **thinking** layer — disciplines an agent applies before and while it acts. It doesn't stop a bad action once decided on; the bundled hooks (`delegate-to-subagents`, `senior-engineer-mindset`) are advisory example scripts, not hard enforcement. For the **enforcement** layer — severity-graded PreToolUse/PostToolUse guards that actually deny `rm -rf`, force-push, committing to main, and similar by default — see [songjiun10-collab/hook](https://github.com/songjiun10-collab/hook), a portable extraction of the same hook framework referenced from this bundle's own hook sections. The two are independent and installable separately; each is more useful with the other.
+
 ## Sources
 
 This bundle pulled ideas from fourteen places and reconstructed them.
