@@ -5,29 +5,17 @@ description: Decide what information goes where — in context, in a file, or dr
 
 # Context Economy
 
-**Optimize the context window; persist everything else.**
+This skill's guidance is calibrated per model. Read the file matching the model you're running as before applying it.
 
-Anything pasted into the conversation occupies space for the rest of the session and vanishes when the session ends — the worst combination: expensive and volatile. Files are the opposite: read only when needed, and they outlive the conversation.
-
-## What Goes Where
-
-| Nature | Where |
+| Model | File |
 |---|---|
-| Needed only for this one judgment | Context (then drop it) |
-| Will be revisited / must survive | File |
-| Another person or session will pick it up | File + a pointer to its location |
-| Large and mostly unused | Leave in the file, read **only the needed part** |
+| Claude Opus 5.5 | `opus-5-5.md` |
+| Claude Fable 5.1 | `fable-5-1.md` |
+| Claude Sonnet 5 | `sonnet-5.md` |
+| OpenAI GPT-6 Astra | `gpt-6-astra.md` |
+| OpenAI GPT-6 Sol | `gpt-6-sol.md` |
+| OpenAI GPT-6 Luna | `gpt-6-luna.md` |
 
-## Practical Rules
+Read whichever file matches the model actually running before applying this skill.
 
-- **Hand off files, not text.** Don't paste long logs, whole files, or bulk output into the conversation — pass the path and let the reader pull only what's needed.
-- **A requested deliverable ships as a file.** A request for analysis, a history, or a record usually means a file (or a commit). Prose scattered into chat is as good as undelivered once the session ends.
-- **A handoff carries one task** — what to do + the interfaces it touches + constraints. Not the whole session history.
-- As a conversation grows, **pin the decisions made so far to a file.** Trust that file over memory later.
-- **Principal-level angle:** a spec or interface note other teams will build against is leverage for them, not just a record for you — losing it to compaction or session end breaks their ability to work independently, not just yours.
-- **Distinguished/Fellow-level angle:** if the doc is on track to become the company-wide reference people cite for years, write it so it survives without you in the room — one that only makes sense with your unwritten context is a bus-factor-of-one liability, no matter whose name is on it.
-- **Executive angle (CTO/VP-Eng):** if losing this record means re-deriving it costs weeks of engineer time or blocks an audit, its survival is a budget and risk-continuity decision — worth a real knowledge-management process, not just trusting one person's habit of writing things down.
-
-## Pointers, Not Summaries
-
-Instead of filling context with "this file has A, B, C," leave **where to look**. Summaries go stale; sources don't.
+**Running a model not listed above** (an older generation, a different model family entirely)? `sonnet-5.md` carries the fullest general-purpose version of the underlying procedure.
