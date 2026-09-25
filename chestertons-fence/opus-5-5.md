@@ -16,7 +16,7 @@ If you see a fence blocking the road and don't know why it's there, **don't tear
 - Why is it written this way? (Performance? A platform constraint? History?)
 - Check `git blame` — what context did this code originate in?
 
-**If you can't answer the above, you're not ready to touch it.** Read more context before deleting or simplifying. This investigation is often faster done directly — a targeted `git blame`, grep for callers, a read of the test file — than dispatched to a subagent; this model tends to delegate more readily than earlier ones, including for legs of an investigation a direct read would close out faster. Reach for a subagent here only when the fence's history spans enough files or services that a parallel search genuinely beats a sequential one.
+**If you can't answer the above, you're not ready to touch it.** Read more context before deleting or simplifying. This investigation is often faster done directly — a targeted `git blame`, grep for callers, a read of the test file — than dispatched to a subagent; Opus 5 guidance, which Anthropic says still applies to Opus 5.5, documents delegating more readily than earlier models, including for legs of an investigation a direct read would close out faster. Reach for a subagent here only when the fence's history spans enough files or services that a parallel search genuinely beats a sequential one.
 
 ## Once you know the reason
 
@@ -38,6 +38,6 @@ Judge whether the reason still holds:
 
 ## Calibration for this model
 
-**A refusal while investigating auth checks, permission gates, or other security-shaped fences may be a false positive, not a real block.** This tier runs broader safety classifiers than earlier ones, and legitimate investigation of "why does this access check exist" can trip one. Retry with a more explicitly scoped, clearly-legitimate framing before concluding the investigation itself is out of bounds.
+**A refusal while investigating auth checks, permission gates, or other security-shaped fences may be a false positive, not a real block.** This model runs safety classifiers (biology, cybersecurity, reasoning extraction); finding vulnerabilities in source code is explicitly allowed, so a `stop_reason: "refusal"` on legitimate investigation of "why does this access check exist" is likely a false positive. Retry with a more explicitly scoped, clearly-legitimate framing before concluding the investigation itself is out of bounds.
 
 **Set effort deliberately for the judgment call, not just the investigation.** Answering "what calls this" is mechanical; judging whether the original reason still holds is the part worth real thinking effort. Thinking is always on here but defaults to medium — raise it for the "once you know the reason" judgment on anything hard-to-reverse (shared library, public contract, compliance-adjacent code), not for the fact-gathering pass.

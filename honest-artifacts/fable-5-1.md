@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Honest Artifacts
 
@@ -13,6 +13,8 @@ The most dangerous code isn't wrong code — it's code where **you can't tell ho
 - **Distinguished/Fellow angle:** A number or methodology solid enough to appear in a conference talk, a blog post, or an open-source release needs to survive scrutiny from people with zero institutional memory of how it was produced — label what's unverified before it becomes the industry's reference point, not after.
 - **Executive angle (CTO/VP-Eng):** A number that ends up in a customer SLA, a sales claim, or a board deck carries legal and reputational risk if it can't be reproduced on demand — verify it before it leaves engineering, not after a customer or investor has already been quoted it.
 - **Record the attempts that didn't pan out, and say so out loud.** Left to your own default, you report progress quietly and surface mainly the thing that worked — the dead ends and near-misses along the way are exactly the kind of detail that's easy to leave unsaid unless you make a point of stating them. The next person won't hit the same wall again only if that wall actually got written down. **Failure is data, not something to hide.**
+
+- **Mark quotations as quotations.** Documented for Fable 5.1: when summarizing documents it's more likely than Fable 5 to reproduce passages of the source without marking them. In a record, a summary, or a doc, either quote with marks and attribution or reword — unmarked source text passed off as your own summary misstates what you verified.
 
 ## Reproducibility
 

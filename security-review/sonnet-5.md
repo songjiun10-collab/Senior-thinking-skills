@@ -38,6 +38,8 @@ Walk the diff against the recurring failure classes (OWASP Top 10, condensed to 
 
 This model follows instructions more literally than the prior generation, so if the full checklist applies — not just "check for injection" — name the categories that matter for this diff explicitly (auth, access control, secrets, etc.) rather than assuming a short prompt will expand into the full OWASP walk on its own. With 1M context, a large diff plus its full surrounding call graph can be reviewed in one pass rather than file by file — useful for tracing an object-level access-control gap across many endpoints at once.
 
+**Don't let a severity bar hide findings.** Documented for Sonnet 5: a review prompt that says "only report high-severity issues" gets followed faithfully, so lower-severity real bugs get investigated and then left out. Report every finding with its severity; filter in a separate step.
+
 ## Warning signs
 
 | Thought | Reality |

@@ -10,7 +10,7 @@
 Not every decision deserves the same amount of time.
 
 - **Easily reversible decisions** (a function's internal implementation, file location, variable names) → build it, don't agonize, fix later.
-- **Hard-to-reverse decisions** (DB schema, public API, data format, core dependency, an interface already shipped) → spend more time, take alternatives seriously. This is the tier that needs effort set explicitly — thinking is always on for this model, but its depth is controlled by effort, and effort defaults to medium (a notch below what earlier Opus defaulted to). Medium is fine for the reversible tier; for a schema or public API decision, raise it on purpose.
+- **Hard-to-reverse decisions** (DB schema, public API, data format, core dependency, an interface already shipped) → spend more time, take alternatives seriously. Thinking is always on for this model and effort defaults to `medium` (Opus 5 defaulted to `high`; in Anthropic's testing 5.5 at `medium` matched or beat Opus 5 at `high`). Medium is fine for the reversible tier; for a schema or public API decision, the scrutiny comes from taking alternatives seriously, and a higher setting — the caller's per-request choice — is worth it where it has shown a gain.
 
 Confirmation follows the same tier: reversible → just do it; irreversible → confirm first. **Gate everything at the same weight, and the gate itself gets ignored.**
 
@@ -31,4 +31,4 @@ Confirmation follows the same tier: reversible → just do it; irreversible → 
 
 ## A note on effort for this model
 
-Thinking can't be turned off here, but its depth is controlled entirely by the effort setting, and the default is one notch lower than what would give a hard-to-reverse decision real scrutiny. For anything in the irreversible tier — schema, public API, core dependency — set effort explicitly rather than trusting the default to produce a deep comparison. And because output length doesn't drop much on its own even at lower effort, ask explicitly for the one-line-per-alternative format if the comparison is running long; it won't compress itself.
+Thinking can't be turned off here, and effort controls its depth; the default is `medium`. For anything in the irreversible tier — schema, public API, core dependency — don't trust any setting to produce a deep comparison by itself: write the alternatives and their costs down explicitly, and if a higher level has shown a gain on decisions like this, say so, so the caller can set it for that request. And because output length doesn't reliably drop at lower effort (carried over from Opus 5 guidance), ask explicitly for the one-line-per-alternative format if the comparison is running long; it won't compress itself.

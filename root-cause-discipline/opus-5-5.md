@@ -22,7 +22,7 @@ The most expensive code is code that re-implements something that already exists
 - Does the standard library or an existing dependency already provide this?
 - The instant you're about to reinstall packages, A/B a library version, or start walking back through commit history — spend one minute first. Spending hours reinventing an answer that already exists is common, and the reinvented version is usually explained less accurately than the original.
 
-Do this step yourself, directly, before reaching for a subagent. This model delegates more eagerly than earlier ones, including for things a direct `git log` or grep would settle in one shot — for a quick "is this already solved" check, doing it inline is almost always faster than a dispatch round-trip.
+Do this step yourself, directly, before reaching for a subagent. Opus 5 guidance (carried over to 5.5) documents delegating more readily than earlier models, including for things a direct `git log` or grep would settle in one shot — for a quick "is this already solved" check, doing it inline is almost always faster than a dispatch round-trip.
 
 ## 1. Cause, not symptom — investigation phase
 
@@ -65,7 +65,7 @@ The most common failure is suppressing the symptom. Before adding a null check, 
 
 - **Where** was this value created in a bad state? Trace back to that point.
 - Could the same root cause be producing **other latent bugs** already?
-- Defensive code is sometimes the right call — but only as a decision made **after** you know the cause. Absent an explicit ask for it, resist adding extra guard rails beyond what the diagnosed cause actually calls for — this model tends toward over-engineering the fix (extra checks, extra flexibility) when left unconstrained.
+- Defensive code is sometimes the right call — but only as a decision made **after** you know the cause. Absent an explicit ask for it, resist adding extra guard rails beyond what the diagnosed cause actually calls for — Opus 5 guidance (still applicable to 5.5) documents expanding a task's scope beyond the request, and in a fix that shows up as extra checks and extra flexibility.
 
 ## 2. Evidence, not assumption
 
@@ -76,14 +76,14 @@ Assumptions about codebase behavior, library behavior, or an error's cause are f
 - Did you actually run it before saying "fixed" or "works"?
 - **Make every claim checkable**: name the file, show the number, quote the command you actually ran. A claim you can't back is worse than saying you don't know.
 
-This model already self-verifies its own conclusions well. Once a hypothesis is confirmed with real evidence, don't pile a second "am I sure?" pass on top of it — that's wasted latency, not a stronger conclusion. Spend the effort budget on actually gathering the evidence, not re-checking it after the fact. And set effort explicitly for a real investigation — thinking is always on, but effort (not thinking) is the depth control, and it defaults to `medium`.
+Opus 5 guidance (carried over to 5.5) says the model verifies its own work unprompted. Once a hypothesis is confirmed with real evidence, don't pile a second "am I sure?" pass on top of it — that's wasted latency, not a stronger conclusion. Spend the effort budget on actually gathering the evidence, not re-checking it after the fact. And set effort explicitly for a real investigation — thinking is always on, but effort (not thinking) is the depth control, and it defaults to `medium`.
 
 If the code under investigation touches security-adjacent territory (auth, crypto, sandboxing) and the model declines mid-investigation, that may be a broader-classifier false positive rather than evidence the code is actually unsafe — worth distinguishing before treating the refusal as a finding.
 
 ## 3. After the fix
 
 - Write the failing reproduction test **first**; prove the fix by making it pass.
-- **One fix at a time.** Don't slip in "while I'm here" improvements or refactors — this model's over-engineering tendency shows up here too; the fix should match the diagnosed cause, not become an opportunity to also clean up nearby code.
+- **One fix at a time.** Don't slip in "while I'm here" improvements or refactors — scope expansion (documented for Opus 5, carried over to 5.5) shows up here too; the fix should match the diagnosed cause, not become an opportunity to also clean up nearby code.
 - Confirm no other tests broke.
 
 ## 4. Three failures means suspect the structure

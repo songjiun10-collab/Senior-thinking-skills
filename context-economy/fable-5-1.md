@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Context Economy
 
@@ -27,6 +27,8 @@ Work from the goal, not a checklist: keep what's needed for the judgment in fron
 - **Principal-level angle:** a spec or interface note other teams will build against is leverage for them, not just a record for you — losing it to compaction or session end breaks their ability to work independently, not just yours.
 - **Distinguished/Fellow-level angle:** if the doc is on track to become the company-wide reference people cite for years, write it so it survives without you in the room — one that only makes sense with your unwritten context is a bus-factor-of-one liability, no matter whose name is on it.
 - **Executive angle (CTO/VP-Eng):** if losing this record means re-deriving it costs weeks of engineer time or blocks an audit, its survival is a budget and risk-continuity decision — worth a real knowledge-management process, not just trusting one person's habit of writing things down.
+
+- **When you write a compaction or handoff summary, name what must survive.** Fable 5.1 responds well to being told explicitly what a summary must retain: problems hit and how they were resolved; options raised, tried, or set aside and why; everything asked for, decided, or ruled out — stated exactly; where things stand; what's still open; and names, numbers, dates, and exact wording kept verbatim.
 
 ## Pointers, Not Summaries
 

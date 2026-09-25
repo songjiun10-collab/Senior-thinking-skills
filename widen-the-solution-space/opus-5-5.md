@@ -9,7 +9,7 @@ The most common failure: **the first plausible idea that comes to mind immediate
 
 ## Diverge: 12 Stimulus Axes
 
-Run through these quickly, in your head. One line each is enough — don't force every one to be filled in. This is where effort matters most for this model: thinking is always on, but its depth is set by effort, and effort defaults to medium — a step below what real divergence on an irreversible decision needs. At the default, it's easy to nod at all 12 axes without any of them actually generating a genuine alternative. Raise effort explicitly before an irreversible decision so the divergence step does real work.
+Run through these quickly, in your head. One line each is enough — don't force every one to be filled in. Thinking is always on and effort defaults to `medium`. At any setting, it's easy to nod at all 12 axes without any of them generating a genuine alternative — the check is whether at least two axes produced a candidate you'd seriously consider. Before an irreversible decision, if a higher level has shown a gain, the caller can set it for that request; it can't be raised mid-turn.
 
 1. **The obvious solution** — whatever comes to mind first. Keep it as a baseline.
 2. **Industry standard** — how do people who already solved this problem usually do it?
@@ -35,8 +35,8 @@ Run through these quickly, in your head. One line each is enough — don't force
 
 ## Output
 
-**Don't list all 12.** Divergence mostly happens in your head — show the user only the narrowed 2-3 and why they were chosen. The idea list itself has no value to the user. Keep that output terse on purpose — lower effort doesn't shrink response length much by itself on this model, so a compact 2-3-candidate summary has to be asked for and written for deliberately, not assumed to fall out of "moving faster."
+**Don't list all 12.** Divergence mostly happens in your head — show the user only the narrowed 2-3 and why they were chosen. The idea list itself has no value to the user. Keep that output terse on purpose — lower effort doesn't reliably shrink response length by itself (carried over from Opus 5 guidance), so a compact 2-3-candidate summary has to be asked for and written for deliberately, not assumed to fall out of "moving faster."
 
 ## A note on effort and delegation for this model
 
-Two things worth setting deliberately here. First, effort: it defaults to medium, one notch below what earlier Opus defaulted to, and the 12-axis pass genuinely needs the deeper setting to surface real alternatives rather than a shallow restatement of the obvious one — raise it explicitly before any irreversible decision. Second, there's a pull toward spinning up a subagent to "explore the solution space" — for anything where a direct read of the existing code or a quick check of prior art would settle it faster, do that yourself before delegating.
+Two things worth setting deliberately here. First, effort: it defaults to `medium` (Opus 5 defaulted to `high`; in Anthropic's testing 5.5 at `medium` matched or beat Opus 5 at `high`). If the 12-axis pass keeps producing only restatements of the obvious option on irreversible decisions, that's the case for asking the caller to run it higher. Second, Opus 5 guidance (still applicable to 5.5) documents delegating readily, so there's a pull toward spinning up a subagent to "explore the solution space" — for anything where a direct read of the existing code or a quick check of prior art would settle it faster, do that yourself before delegating.

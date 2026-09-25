@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Complexity budget
 
@@ -29,6 +29,10 @@ Abstractions, config options, extension points added "in case it's needed later"
 ## Simple ≠ disposable
 
 Even a one-off analysis or script, if it produced a real result, **gets saved as a file.** Simple and unabstracted is fine — living only in shell history or `/tmp` means the next person has to rebuild it from scratch.
+
+## Scope at higher effort
+
+Anthropic's Fable 5 guidance (it says Fable 5 prompts still work on 5.1): on routine work at higher effort the model "can gather context and deliberate beyond what the task needs," and it occasionally takes unrequested actions (its examples: drafting an email nobody asked for, creating defensive git-branch backups). Both are budget spent without a request behind it — the same YAGNI test applies to actions as to code.
 
 ## Working long stretches on this
 

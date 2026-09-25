@@ -38,7 +38,7 @@ Each step inside a task is a single, explicit action:
 5. Commit
 ```
 
-**Write the trigger for each action explicitly**, not just the action itself — "run it" should say which command, "confirm it fails" should say what output confirms that. This model follows instructions close to the letter, so a step left implicit (an assumed test runner, an assumed confirmation method) is more likely to get executed exactly as literally written, gaps and all, than filled in generously. Underspecifying a step here isn't a shortcut, it's where the plan actually breaks.
+**Write the trigger for each action explicitly**, not just the action itself — "run it" should say which command, "confirm it fails" should say what output confirms that. A step left implicit (an assumed test runner, an assumed confirmation method) is a gap whoever executes the plan has to guess at — and in a pipeline, nobody is there to ask. Underspecifying a step here isn't a shortcut, it's where the plan actually breaks.
 
 ## 4. What every task needs
 
@@ -59,8 +59,8 @@ If a plan spans several independent subsystems, **split the plan.** Each plan sh
 | "This task is big but let's keep it as one chunk" | If you can't test it in one shot, it isn't one task |
 | "File layout can wait" | Decomposition decisions are expensive to reverse. Sketch them first |
 | "Writing out steps is overkill" | Not for the next person (or you, next session) |
-| "The step's intent is obvious, I don't need to spell out the exact command/trigger" | This model executes what's literally written; an implicit step is a gap, not a shortcut |
+| "The step's intent is obvious, I don't need to spell out the exact command/trigger" | Whoever executes it — this model in a pipeline, or a worker with no context — gets only what's written; an implicit step is a gap, not a shortcut |
 
 ## Calibration note for this model
 
-This is the cost-efficient mid tier, well-suited to running a bite-sized plan end to end across a multi-step agentic workflow at a fraction of the flagship tier's cost. It's not the strongest available judgment for the file-layout and task-boundary decisions themselves when the codebase or the requirements are genuinely ambiguous — for those calls, have a stronger model (or a human) sign off on the file layout in step 1 before this model executes the resulting task list; the execution itself, including the literal step-by-step discipline above, is squarely this model's strength.
+This is the cost-efficient mid tier, well-suited to running a bite-sized plan end to end across a multi-step agentic workflow at a fraction of the flagship tier's cost. OpenAI positions it as a lower-cost alternative to Astra, not the top of the family — so for the file-layout and task-boundary decisions themselves, when the codebase or the requirements are genuinely ambiguous, have a stronger model (or a human) sign off on the file layout in step 1 before this model executes the resulting task list; the execution itself, including the literal step-by-step discipline above, is squarely this model's strength.

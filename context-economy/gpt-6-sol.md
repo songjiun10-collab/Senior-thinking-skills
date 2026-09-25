@@ -34,4 +34,4 @@ Instead of filling context with "this file has A, B, C," leave **where to look**
 
 ## Reasoning effort isn't free, tune it
 
-More reasoning effort doesn't reliably improve results on this tier — benchmarks show effort peaking below the top setting on some tasks. That's a separate knob from context economy, but the two interact: don't compensate for an under-specified handoff by cranking effort up on the receiving end and hoping it reasons its way to the missing information. Write the handoff completely; tune effort empirically for the task, not as a substitute for a clear brief.
+Don't assume the highest reasoning effort (default `medium`; `none` through `max` available) is always better — measure it on your own tasks. That's a separate knob from context economy, but the two interact: don't compensate for an under-specified handoff by cranking effort up on the receiving end and hoping it reasons its way to the missing information. Write the handoff completely; tune effort empirically for the task, not as a substitute for a clear brief.

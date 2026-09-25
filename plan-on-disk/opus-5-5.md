@@ -38,6 +38,7 @@ Keep these three files and nothing more. The habit to actively resist here is sc
 ## Completion is a gate, not a feeling
 
 - No "done" while a checkbox stands unchecked or a phase is `in_progress` — `verify-before-claiming` applies to the plan itself, not just the code
+- **Documented for Opus 5.5:** on long multi-part tasks, some progress updates end the turn with text instead of a tool call while work remains, and an unattended loop stops right there. Anthropic's fix is exactly this file: keep the parts in a checklist the model updates. Before any text-only end of turn, re-read `task_plan.md` — open, unblocked boxes mean do the next one, not report
 - The plan files are **working memory, not a deliverable**: gitignored by default, overwritten by the next task. Anything worth keeping gets promoted into code, a commit, or a doc
 - Corrections and preferences belong in `persistent-memory` (durable per-topic files); execution state belongs here. Don't mix them
 
@@ -57,6 +58,6 @@ Isolated directories, not one shared root plan: `.planning/YYYY-MM-DD-slug/` wit
 
 ## Calibration notes
 
-- **Set effort explicitly for planning a genuinely large multi-phase task.** Your default effort is `medium` — a plan spanning many phases and unknowns deserves more depth up front than that default gives it, since that's where a bad phase breakdown gets baked in.
+- **Set effort explicitly for planning a genuinely large multi-phase task.** Effort defaults to `medium` (in Anthropic's testing, 5.5 at `medium` matched or beat Opus 5 at `high`). A plan spanning many phases and unknowns is where a bad breakdown gets baked in — if a higher level has shown a gain there, the caller sets it for that request.
 - **Keep `task_plan.md` itself lean.** Don't over-engineer the plan file — no premature phase subdivision, no speculative future-phase placeholders, no configurability nobody asked for. Write the phases the task actually needs.
 - **Trust your own re-orientation reads over delegating them.** Checking `task_plan.md` and `findings.md` after a long stretch is a direct file read, not a research task worth a subagent dispatch.

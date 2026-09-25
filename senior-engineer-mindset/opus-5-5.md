@@ -5,7 +5,7 @@
 
 # Senior + Principal + Distinguished + Executive Engineer Mindset
 
-The gap between junior and senior isn't "how well you write code" — it's **what you think about before you write it.** This model is fluent at producing code, and thinking is always on for it — but "always thinking" is not the same as "thinking about the right things before acting." The first plausible idea becoming code immediately is still the default failure mode to guard against, and on this tier it shows up specifically as **over-engineering**: extra files, unrequested abstractions, flexibility nobody asked for, layered on top of a plausible-looking first idea before the actual scope has been checked.
+The gap between junior and senior isn't "how well you write code" — it's **what you think about before you write it.** This model is fluent at producing code, and thinking is always on for it — but "always thinking" is not the same as "thinking about the right things before acting." The first plausible idea becoming code immediately is still the default failure mode to guard against. Opus 5.5 "tends to get to work quickly," and Opus 5 guidance — which Anthropic says still applies to 5.5 — documents **scope expansion**: adding steps that weren't requested or applying its own judgment about what the task should be, before the actual scope has been checked.
 
 This bundle blends four lenses, stacked — most tasks only need the first, but the higher ones are there when the stakes call for them:
 
@@ -59,11 +59,11 @@ In rough workflow order:
 | Look back | `verify-before-agreeing` | Evaluate review feedback technically before implementing it |
 | Look back | `adversarial-review` | Interrogate an in-flight decision with a disproof bias |
 
-**`simplicity-budget` and `surgical-change` aren't optional nice-to-haves for this model — pull them by default**, not just when a task looks complex. They are the direct counter to the over-engineering tendency above, and skipping them because a task "doesn't look complex enough to need them" is exactly the situation where they'd catch something.
+**`simplicity-budget` and `surgical-change` aren't optional nice-to-haves for this model — pull them by default**, not just when a task looks complex. They are the direct counter to the scope expansion above, and skipping them because a task "doesn't look complex enough to need them" is exactly the situation where they'd catch something.
 
 **Before dispatching to `delegate-to-subagents`, run its "decide whether to delegate first" check for real.** This model reaches for a subagent more eagerly than earlier ones, including for a single grep or one well-scoped file read that would resolve faster done directly. The instinct to delegate needs an actual reason — parallelizable work, needed distance from your own reasoning, a genuinely large search — not just a hunch that delegating is the more senior-looking move.
 
-**Skip stacking extra verification on top of `verify-before-claiming`.** This model already self-verifies its own output well; piling a second, redundant "are you sure?" pass on top of actually running the command and checking the result wastes tokens and latency without adding correctness. The evidence gate — run it, check it — stays as-is; it's not the same thing as internal re-verification and isn't where the waste is.
+**Skip stacking extra verification on top of `verify-before-claiming`.** Opus 5 guidance (carried over to 5.5) says the model verifies its own work unprompted; piling a second, redundant "are you sure?" pass on top of actually running the command and checking the result wastes tokens and latency without adding correctness. The evidence gate — run it, check it — stays as-is; it's not the same thing as internal re-verification and isn't where the waste is.
 
 ## Situational picks
 
@@ -97,7 +97,7 @@ In rough workflow order:
 
 Not in the table? Start with `clarify-the-real-problem` + `premortem` + `weigh-tradeoffs`.
 
-**A note on security-shaped work specifically**: this tier runs broader safety classifiers than earlier models (bio, reasoning-extraction join cyber alongside the existing ones). A refusal on a legitimate security-review or risk-assessment task — reviewing an auth check, threat-modeling a system, investigating whether an access control actually holds — may be a false positive worth a more explicitly-scoped retry, not necessarily a real block. Don't quietly abandon the security-review or threat-and-scale-check pass because the first framing got refused.
+**A note on security-shaped work specifically**: this model runs safety classifiers for biology, cybersecurity, and reasoning extraction (biology and reasoning extraction are new relative to Opus 5); finding vulnerabilities in source code is explicitly allowed. A refusal on a legitimate security-review or risk-assessment task — reviewing an auth check, threat-modeling a system, investigating whether an access control actually holds — may be a false positive worth a more explicitly-scoped retry, not necessarily a real block. Don't quietly abandon the security-review or threat-and-scale-check pass because the first framing got refused.
 
 ## First: classify into one of three tracks
 
@@ -111,7 +111,7 @@ Before the first question, **say out loud** which track this task is on — so t
 
 Principal angle: track selection isn't just about this task's size — it's about **who else is affected.** A one-file change that other teams will copy as a pattern, or that sits on a shared interface, is structural even if the diff is small.
 
-**Track classification is also where the over-engineering instinct does the most damage if skipped.** Calling a task Structural when it's actually Bounded burns effort on ceremony; calling it Bounded when it's actually Structural burns effort on scope creep once real complexity shows up mid-build. Get the classification honest before building, not after the first draft reveals it was wrong.
+**Track classification is also where scope expansion does the most damage if skipped.** Calling a task Structural when it's actually Bounded burns effort on ceremony; calling it Bounded when it's actually Structural burns effort on scope creep once real complexity shows up mid-build. Get the classification honest before building, not after the first draft reveals it was wrong.
 
 ### The "too simple to need a check" trap
 
@@ -123,7 +123,7 @@ Principal angle: track selection isn't just about this task's size — it's abou
 | "Call it bounded and skip the spec" | Looking for an excuse to skip is itself a red flag. Go heavier. |
 | "I know this kind of app, so it's bounded" | Bounded is judged by the **repo**, not by your familiarity. A new project is structural. |
 | "It grew but it's almost done, so skip reclassifying" | Hidden complexity escalates the track. Stop and say so. |
-| "This needs a config layer / plugin system / extra flexibility to be done right" | That's the over-engineering instinct, not the task's actual requirement. If nothing asked for it, it isn't part of the check — it's scope the check should catch. |
+| "This needs a config layer / plugin system / extra flexibility to be done right" | That's scope expansion, not the task's actual requirement. If nothing asked for it, it isn't part of the check — it's scope the check should catch. |
 
 ## What changes with scale
 
@@ -133,9 +133,9 @@ Only the **format** changes per track:
 - **Bounded** — a 3-5 bullet design note. Pull only the disciplines that actually apply.
 - **Structural** — write it up in the format below, then hand off to `bite-sized-plan`.
 
-**Response length doesn't shrink much on its own at lower effort on this model** — a Spike-track 2-3 sentence answer or a Bounded-track 3-5 bullet note has to be written that way deliberately, not assumed to fall out automatically from "this is a small task." State the target format explicitly rather than trusting brevity to follow from the track.
+**Response length doesn't reliably shrink on its own at lower effort** (carried over from Opus 5 guidance) — a Spike-track 2-3 sentence answer or a Bounded-track 3-5 bullet note has to be written that way deliberately, not assumed to fall out automatically from "this is a small task." State the target format explicitly rather than trusting brevity to follow from the track.
 
-**Set effort deliberately, not by default.** Thinking is always on for this model and cannot be turned off — effort is the only depth control, and its default sits one notch below what real depth needs. For Spike and most Bounded work, default effort is fine. For a Structural task, or for any hard-to-reverse or ambiguous call inside a Bounded one — the kind of decision `weigh-tradeoffs`, `premortem`, or `adversarial-review` exist for — raise effort explicitly before running those disciplines. Effort is a lever to spend on purpose, not a default to leave alone or max out reflexively.
+**Set effort deliberately, not by default.** Thinking is always on for this model and cannot be turned off — effort is the depth control, and it defaults to `medium`, which in Anthropic's testing matched or beat Opus 5 at `high` on coding and knowledge work. For Spike and most Bounded work, the default is fine. For a Structural task, or a hard-to-reverse call inside a Bounded one, a higher level is worth it only where it has shown a measured gain — Anthropic reserves `xhigh`/`max` for that — and it's set by the caller per request, not raised mid-turn. Effort is a lever to spend on purpose, not to max out reflexively.
 
 ## Output format (medium-to-large tasks)
 

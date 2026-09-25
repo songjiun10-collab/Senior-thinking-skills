@@ -4,7 +4,7 @@
 
 A security review is itself a containment boundary — and HALO's containment experiments (songjiun10-collab/Halo) measured exactly how boundaries like it fail. The reviewer is a monitor; monitors share blind spots, go stale, and get gamed. `security-review` decides what to check in a security-sensitive diff; this skill decides how much to trust the checking itself.
 
-You already self-verify well on security-sensitive diffs without being told to — don't pile a second "double-check your read" instruction on top of this skill's own re-verification steps (worst case, staleness, sandbox probe). That's wasted tokens for no extra correctness. What actually adds assurance is the independent evidence channel below (running the exploit, not re-reading the diff a second time), and thinking effort defaults to `medium` here — set it explicitly higher before a containment or auth review that needs real depth, since effort is your only depth control and low effort won't shrink your output, just your reasoning.
+Opus 5 guidance (carried over to 5.5) says the model verifies its own work unprompted, security-sensitive diffs included — don't pile a second "double-check your read" instruction on top of this skill's own re-verification steps (worst case, staleness, sandbox probe). That's wasted tokens for no extra correctness. What actually adds assurance is the independent evidence channel below (running the exploit, not re-reading the diff a second time), and thinking effort defaults to `medium` here — set it explicitly higher before a containment or auth review that needs real depth, since effort is your only depth control and low effort won't shrink your output, just your reasoning.
 
 ## Redundancy without independence is not redundancy (E001-B, E002)
 

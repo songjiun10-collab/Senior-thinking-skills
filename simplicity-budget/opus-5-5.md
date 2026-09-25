@@ -7,11 +7,11 @@
 
 Treat complexity like a budget. Every bit you spend now, you pay back with interest later.
 
-**Read this one carefully — you over-engineer by default.** Absent an explicit constraint, the documented tendency is extra files, unneeded abstractions, and unrequested flexibility. This skill is the direct counter to that tendency, and applying it "as written" isn't enough here: apply it assertively. Treat every abstraction, extra file, and config knob you're about to add as guilty until proven necessary by the request in front of you, not by a plausible future one. Two mechanics make this harder for you specifically, so name them up front: thinking is always on and effort defaults to `medium` — a higher effort setting will happily spend that extra depth generating robustness nobody asked for, so set effort deliberately and pair it with an explicit brevity/simplicity instruction; and your response length doesn't shrink much on its own just because effort is lower, so "keep it small" has to be said outright, not assumed from a lower effort setting.
+**Read this one carefully.** Opus 5 guidance, which Anthropic says still applies to Opus 5.5, documents a tendency to expand a task's scope — adding steps that weren't requested or applying its own judgment about what the task should be. (The specific "extra files, unneeded abstractions, unrequested flexibility" pattern is documented for Opus 4.5/4.6, not the 5 line; watch for it anyway, since it's the usual shape scope expansion takes in code.) This skill is the direct counter, and applying it "as written" isn't enough here: apply it assertively. Treat every abstraction, extra file, and config knob you're about to add as guilty until proven necessary by the request in front of you, not by a plausible future one. Two mechanics make this harder for you specifically, so name them up front: thinking is always on and effort defaults to `medium` — extra depth from a higher setting should go into checking, not into robustness nobody asked for, so pair any higher setting with an explicit simplicity instruction; and response length doesn't reliably shrink just because effort is lower (carried over from Opus 5 guidance), so "keep it small" has to be said outright, not assumed from a lower effort setting.
 
 ## YAGNI — don't build what isn't needed now
 
-Abstractions, config options, extension points added "in case it's needed later" mostly go unused — and in the meantime make the code harder to read **today**. This is the exact trap the over-engineering tendency walks into: a plausible-sounding "might need it later" is not evidence of need.
+Abstractions, config options, extension points added "in case it's needed later" mostly go unused — and in the meantime make the code harder to read **today**. This is the exact trap scope expansion walks into: a plausible-sounding "might need it later" is not evidence of need.
 
 - Is this feature, parameter, or layer needed **now**? If the honest answer is "it'd be nice to have," that's a no
 - Are you designing on top of a guess like "we might swap the DB someday"? Notice when you're about to build for a hypothetical, and stop
@@ -24,7 +24,7 @@ Abstractions, config options, extension points added "in case it's needed later"
 
 ## Complexity check
 
-- Is there a way to solve this with **half the code**? If 200 lines can become 50, rewrite it. If your first draft added a helper module, a config object, and a strategy interface for what could be a 10-line function, that's the tendency showing up — cut back to the smallest version that satisfies the actual request
+- Is there a way to solve this with **half the code**? If 200 lines can become 50, rewrite it. If your first draft added a helper module, a config object, and a strategy interface for what could be a 10-line function, that's scope expansion showing up — cut back to the smallest version that satisfies the actual request
 - "Would a senior engineer call this overcomplicated?" — if yes, simplify. Ask this specifically about anything you added that wasn't explicitly requested
 - Does each new dependency, concept, or layer actually earn its cost? "Earns its cost" means the current request needs it, not that it's good practice in general
 - If conditional branches keep multiplying, can the case be made **not happen** in the first place instead of handling it?

@@ -4,7 +4,7 @@
 
 Code shows **what** was done, not **why**. Six months from now, whoever runs into that decision again (usually you) can't answer "why is this like this?" from the code alone.
 
-Thinking is always on for this model, but effort — not thinking — is the depth control, and it defaults to `medium`. A record worth writing (an architectural call, a reversed decision) deserves effort set explicitly above default; left at default, the ADR tends to come out thinner than the decision actually warrants.
+Thinking is always on for this model, but effort — not thinking — is the depth control, and it defaults to `medium`. In Anthropic's testing `medium` on 5.5 matched or beat Opus 5 at `high`, so the default is usually enough; for a record that carries real weight (an architectural call, a reversed decision), the depth comes mainly from answering the rejected-alternatives questions below, not from a higher setting.
 
 ## When to record it
 
@@ -15,7 +15,7 @@ Thinking is always on for this model, but effort — not thinking — is the dep
 - Distinguished/Fellow angle: if the person who made this call could leave tomorrow, the record has to stand on its own — legible to someone joining the company in five years with zero institutional memory of the meeting where this was decided
 - Executive angle (CTO/VP-Eng): if the decision moves headcount, vendor/infra spend, or carries regulatory exposure, the record needs to be legible to a board or investor audit and traceable to the budget line it justified — not just clear to the next engineer
 
-Skip it where the code explains itself (naming, function decomposition already do the job) — a comment that just restates the code is noise. Don't pad a simple decision into a longer document than it needs just because more depth is available — this model tends toward over-engineering left unconstrained, and an ADR is not exempt: match the record's length to the decision's actual weight.
+Skip it where the code explains itself (naming, function decomposition already do the job) — a comment that just restates the code is noise. Don't pad a simple decision into a longer document than it needs just because more depth is available — Opus 5 guidance (still applicable to 5.5) notes written deliverables run longer than needed, and an ADR is not exempt: match the record's length to the decision's actual weight.
 
 ## Where to record it
 

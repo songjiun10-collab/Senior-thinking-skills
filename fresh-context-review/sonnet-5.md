@@ -30,6 +30,10 @@ On a change to a shared interface, add a third lens: **who else calls this, and 
 - Actually read the diff. What you think you fixed and what actually changed can differ.
 - Can't confirm something from the diff? **Mark it unconfirmed.** Don't wave it through — and don't round "probably fine" up to "confirmed" in the write-up; state exactly what was and wasn't checked.
 
+## Report every finding, filter afterward
+
+Documented for Sonnet 5: when a review prompt sets a bar ("only high-severity," "be conservative," "don't nitpick"), it follows that bar faithfully — it may find the bug and then not report it, so measured recall drops even though bug-finding ability didn't. At the finding stage, the job is coverage: list every real issue with a severity label, and let a separate pass (or the reader) filter. If you must self-filter in one pass, name the bar concretely — "anything that could cause incorrect behavior, a test failure, or a misleading result; omit only pure style or naming preferences."
+
 ## No self-censoring
 
 Don't pre-filter findings before the review with "this is probably fine." Even something you think is a false positive goes on the list — judge it later. Pre-grading buries the real problems along with the noise.

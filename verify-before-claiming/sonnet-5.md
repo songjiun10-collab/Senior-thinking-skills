@@ -62,6 +62,10 @@ Skip any step and it's not verification — it's a guess. Follow these five step
 | "Partial check is enough" | Partial proves nothing |
 | "Worded it differently, so the rule doesn't apply" | Follow the spirit, not the letter |
 
+## Don't stack loops on top of evidence
+
+Documented for Sonnet 5: it reaches for tools and runs self-verification loops more readily than Sonnet 4.6. That's the right instinct for getting evidence — keep it pointed at the gate above (run the actual command, read the actual output) rather than at repeated re-checks of a claim already grounded in a fresh, full run.
+
 ## Scope
 
 Applies to **every phrasing that implies** success or completion — not just the exact words, but rephrasings and implications too. The more consumers or teams will build on this claim, the more of them the verification needs to actually cover — a green local suite proves your code works, not that every downstream caller still does. **Distinguished/Fellow angle:** when the claim underwrites a multi-year, company-wide bet — a default other orgs adopt, a primitive that gets open-sourced or shows up in a conference talk — the evidence has to be reproducible from scratch by someone with zero institutional memory, not just trusted because the person who ran it is still around to vouch for it. **Executive angle (CTO/VP-Eng):** when the claim is said to a board, regulator, or customer — "we're compliant," "the incident is contained," "we can hold this SLA" — it stops being a technical statement and becomes a contractual or legal one, so verify it against that bar before it's said out loud, because walking it back costs a contract or a headline, not a revert. If you can't run the verification, say so — "haven't run the tests yet" beats "should work."

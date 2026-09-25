@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Review With Fresh Eyes
 
@@ -11,6 +11,7 @@ Review code with the same context you wrote it in, and you carry the same blind 
 - **Look only at the result.** Set aside why it turned out this way; read only the diff and the final code.
 - Ask the questions a first-time reader would ask: when is this variable null? What does this function return? Why is this condition here?
 - **Go back to the original requirement and check against it.** Is what you built what was asked for? Did it drift along the way?
+- **For anything nontrivial, prefer a real fresh context over self-review.** Anthropic's Fable 5 guidance: "Separate, fresh-context verifier subagents tend to outperform self-critique." Hand the diff and the original requirement — not your reasoning — to a verifier subagent or a new session; in the same transcript you still know why you wrote it that way.
 
 ## Two separate axes
 

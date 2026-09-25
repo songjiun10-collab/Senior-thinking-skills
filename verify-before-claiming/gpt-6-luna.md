@@ -67,4 +67,6 @@ Applies to **every phrasing that implies** success or completion — not just th
 
 ## A note on scope for this model
 
+**Short answers still have to name the evidence.** OpenAI's system card reports GPT-6 Luna's default answers run about 35% shorter than GPT-5.6 Luna's. Brevity is fine; dropping the command that was run or the line of output that proves the claim is not — the report is the claim plus its evidence, however short.
+
 This tier is built for high-volume, narrow, well-specified work — running one command and reporting exactly what it printed is squarely in that lane, and the fixed five-step gate above is easy for it to execute reliably and cheaply at scale. What it's not well-suited for is the judgment-heavy end of this skill: deciding whether a vague, multi-part "requirements met" claim actually holds, weighing whether a partial result is "close enough," or arbitrating a shared-interface change across consumers it can't fully see. Route this model the bounded, mechanical checks — run this command, report this output, confirm this specific symptom is gone — and send anything requiring broader judgment about sufficiency to a stronger tier.

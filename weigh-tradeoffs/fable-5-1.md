@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Tradeoffs and Decision Weight
 
@@ -13,7 +13,7 @@ Confirmation follows the same tier: reversible → just do it; irreversible → 
 
 ## How to Compare
 
-State the decision and its real constraints as a goal, not a script to execute — this model's own reasoning through a tradeoff space tends to exceed what a prescriptive checklist would produce, so let it work the comparison out rather than walking it through alternative-by-alternative:
+State the decision and its real constraints as a goal, not a script to execute — Anthropic's Fable 5 guidance warns that skills written for prior models "are often too prescriptive … and can degrade output quality," so let the comparison be worked out rather than walking it through alternative-by-alternative:
 
 - Lay out the pros and cons of 2-3 real alternatives **in one line each**: speed vs. complexity, flexibility vs. learning curve, easier now vs. easier later, performance vs. readability.
 - Don't pick something reflexively because it's familiar. Familiarity is a legitimate advantage, but it has to be a **stated** one.

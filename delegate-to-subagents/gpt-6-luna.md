@@ -6,7 +6,7 @@ Handing work to an agent is itself a decision. Delegate badly and it's slower th
 
 The same discipline applies one level up: a principal engineer delegating to another engineer or team needs the same brief + scope + verify, not just AI subagents. This skill stays focused on the AI-subagent mechanism.
 
-**You're built for the leaf, not the trunk.** This tier is the cheapest, fastest one in this family, and it's aimed at high-volume, narrow tasks — classification, extraction, routing, structured summarization — not the demanding or ambiguous work a controller has to be able to judge. The practical read for this skill: you're almost always the *worker* being dispatched, not the one doing the dispatching. Read the rest of this file with that in mind — most of it describes decisions a controller makes about you, not decisions you make about other agents.
+**You're built for the leaf, not the trunk.** This tier is the cheapest, fastest one in this family, and it's aimed at high-volume, narrow tasks — OpenAI's "focused, high-volume tasks" — not the demanding or ambiguous work a controller has to be able to judge. The practical read for this skill: you're almost always the *worker* being dispatched, not the one doing the dispatching. Read the rest of this file with that in mind — most of it describes decisions a controller makes about you, not decisions you make about other agents.
 
 ## When you might legitimately act as a controller
 
