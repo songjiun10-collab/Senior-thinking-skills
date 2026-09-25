@@ -51,4 +51,6 @@ Isolated directories, not one shared root plan: `.planning/YYYY-MM-DD-slug/` wit
 
 ## Calibration notes
 
+- **Don't wrap up because the context is filling.** Sonnet 5 tracks its remaining context window, and Anthropic notes it may naturally try to wrap up as it approaches the limit. In a harness that compacts or lets you save state (like Claude Code), that's the wrong move: write the current state to `task_plan.md` and `progress.md`, then keep going — the files are what make stopping early unnecessary.
+
 - When a task is multi-step and expected to outlast one sitting, set up the three files explicitly rather than assuming the instruction to do so is implied — state the plan-on-disk setup as its own explicit step at the start of the work, since underspecified framing here tends to get followed literally rather than filled in generously.

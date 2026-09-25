@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Search First
 
@@ -20,6 +20,8 @@ Assume API knowledge from training data is **stale.** Libraries change signature
 4. **Run it for real if needed** — one REPL line is cheaper than ten lines of guessing.
 
 State the verification goal (confirm this API's real current signature and behavior) rather than scripting the exact lookup order as a rigid procedure — this model handles long, multi-library verification chains well on its own, and its own judgment about which source to check first for a given question often beats a fixed sequence.
+
+**At `low` effort this matters more, not less.** Documented for Fable 5.1: at `low` it calls search and retrieval tools less often and answers from memory more. Recognizing a name is not knowing its current state — for anything in a fast-moving area (AI models, developer tools, a library that ships monthly), search before answering, with the name exactly as the user wrote it in at least one query.
 
 ## Cost Sense
 

@@ -13,7 +13,7 @@ See `SKILL.md` for the `scripts/memory.py` CLI reference (`show` / `append` / `l
 - The same kind of correction has come up more than once ("no, always use tabs here," "don't touch the generated files," "this client wants short replies")
 - You're starting a task type you expect to repeat (a recurring review, a recurring report format, a recurring delegation brief)
 - Don't make one for a correction you're confident won't recur — that's just noise to maintain
-- **Watch your own default here**: your instinct, absent a check, leans toward building out more structure than a single correction warrants — a topic file with subsections, a taxonomy of correction types, a template for future entries. One dated line is the entire deliverable. Resist adding scaffolding nobody asked for.
+- **Watch scope here**: Opus 5 guidance (still applicable to 5.5) documents expanding a task's scope and writing longer deliverables than needed; for memory that means more structure than a single correction warrants — a topic file with subsections, a taxonomy of correction types, a template for future entries. One dated line is the entire deliverable. Resist adding scaffolding nobody asked for.
 
 ## Where it belongs
 

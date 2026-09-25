@@ -122,6 +122,8 @@ Only the **format** changes per track:
 - **Bounded** — a 3-5 bullet design note. Pull only the disciplines that actually apply.
 - **Structural** — write it up in the format below, then hand off to `bite-sized-plan`.
 
+**Effort tracks the track.** Documented for Sonnet 5: effort defaults to `high` and is respected strictly — at `low` and `medium` it scopes work to what was asked, with some risk of under-thinking on moderately complex tasks. Spike work fits a lower setting; a Structural task, or a hard-to-reverse call inside a Bounded one, belongs at `high` or `xhigh` (Anthropic's recommendation for the hardest coding and agentic work). Effort is set by the caller per request — if a Structural task is running low, say so rather than prompting around it.
+
 With a **1M context window and awareness of its own remaining token budget**, this model can afford to keep the full relevant context loaded — prior decisions in this conversation, related files, the actual repo state — through however deep the router's flow goes, rather than compressing early to save room. Use that headroom for the verify/understand/explore stages rather than trimming context prematurely; the context-awareness itself will flag if the budget is genuinely getting tight.
 
 ## Output format (medium-to-large tasks)

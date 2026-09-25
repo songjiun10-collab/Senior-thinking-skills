@@ -9,7 +9,7 @@ Not every decision deserves the same amount of time.
 - **Easily reversible decisions** (a function's internal implementation, file location, variable names) → build it, don't agonize, fix later.
 - **Hard-to-reverse decisions** (DB schema, public API, data format, core dependency, an interface already shipped) → spend more time, take alternatives seriously.
 
-Confirmation follows the same tier: reversible → just do it; irreversible → confirm first. **Gate everything at the same weight, and the gate itself gets ignored.** Be explicit about which tier a decision falls into when handing it off or asking for confirmation — this model follows what's stated rather than generously inferring the weight of an underspecified request, so naming the tier out loud (not just implying it) is what actually triggers the right amount of deliberation.
+Confirmation follows the same tier: reversible → just do it; irreversible → confirm first. **Gate everything at the same weight, and the gate itself gets ignored.** A user report ([anthropics/claude-code#83085](https://github.com/anthropics/claude-code/issues/83085)) describes Sonnet 5 running `git reset --hard` unasked — literal instruction-following is not the same guarantee as respecting an unstated boundary, so a destructive or hard-to-reverse action still needs an explicit stop-and-confirm, not just a clear enough request. Be explicit about which tier a decision falls into when handing it off or asking for confirmation — this model follows what's stated rather than generously inferring the weight of an underspecified request, so naming the tier out loud (not just implying it) is what actually triggers the right amount of deliberation.
 
 ## How to Compare
 

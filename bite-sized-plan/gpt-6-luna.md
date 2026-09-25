@@ -40,7 +40,7 @@ Each step inside a task is a single, explicit action:
 5. Commit
 ```
 
-**Write the trigger for each action explicitly**, not just the action itself — "run it" should say which command, "confirm it fails" should say what output confirms that. This is the level of literalness this model handles best: a fully explicit step list, with no gap left to fill by inference.
+**Write the trigger for each action explicitly**, not just the action itself — "run it" should say which command, "confirm it fails" should say what output confirms that. OpenAI positions this tier for "focused, repeatable tasks" — a fully explicit step list, with no gap left to fill by inference, is that shape.
 
 ## 4. What every task needs
 

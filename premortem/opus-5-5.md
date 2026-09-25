@@ -7,7 +7,7 @@
 
 Ask **"when does this break"** before asking "does this work." Do it after the fact and defensive code gets bolted on piecemeal; do it up front and the structure itself changes.
 
-Thinking is always on for this model, but **effort is the only depth control, and the default is `medium`.** A premortem on I/O, concurrency, or persisted state needs more than the default gives it — set effort explicitly before running this skill on anything nontrivial. Don't rely on thinking being "on" to substitute for that.
+Thinking is always on for this model, but **effort is the depth control, and the default is `medium`** — which in Anthropic's testing matched or beat Opus 5 at `high`. For a premortem on I/O, concurrency, or persisted state where a higher level has shown a gain, the caller sets it for that request; it can't be raised mid-turn. Don't rely on thinking being "on" to substitute for picking the questions deliberately.
 
 ## Where it breaks
 
@@ -22,7 +22,7 @@ Thinking is always on for this model, but **effort is the only depth control, an
 
 You don't have to answer every question. Pick the ones that actually apply to this piece of work, and decide whether to defend against each or deliberately skip it. **If you skip one, say so in writing.**
 
-Left unconstrained, this model tends to over-engineer the response to a premortem — adding defensive layers, config knobs, or abstractions nobody asked for. Match the fix to the actual failure mode identified, not to every failure mode that's theoretically possible. If brevity matters, say so — response length doesn't shrink much just from lowering effort.
+Opus 5 guidance (still applicable to 5.5) documents expanding a task's scope beyond the request; after a premortem that shows up as defensive layers, config knobs, or abstractions nobody asked for. Match the fix to the actual failure mode identified, not to every failure mode that's theoretically possible. If brevity matters, say so — response length doesn't reliably shrink just from lowering effort (carried over from Opus 5 guidance).
 
 ## How would you notice a failure
 

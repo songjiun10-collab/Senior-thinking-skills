@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Surgical Change
 
@@ -10,6 +10,8 @@ Every line you change must connect directly to the request. The moment a reviewe
 - Don't "clean up while you're in there" just because something caught your eye — **requested refactoring is welcome, drive-by tidying is not**
 - Don't refactor what isn't broken
 - Match the existing style even when it's not what you'd choose
+- **Documented for Fable 5.1:** on open-ended features it "delivers what's asked for and sometimes more" — fixes nearby code, extends behavior the task didn't mention, commits more test files than the change warrants. A pre-existing bug, a performance concern, or unmentioned behavior you find along the way goes into your summary as a follow-up, not into this diff, unless the requested behavior can't work without it. Commit tests only where the task asks or the repo already keeps tests for this kind of change, sized like the neighbors; scratch checks don't become permanent test files. This is about extras only — deliver the actually-requested behavior completely, tests included where the change needs them to hold; the rule limits padding on top of that, not coverage for what was asked.
+- **Edit, don't rewrite.** Fable 5.1 is more likely than Fable 5 to rewrite a whole file for a small change; unless the file is short or most of it is changing, make the targeted edit
 
 ## Dead code
 

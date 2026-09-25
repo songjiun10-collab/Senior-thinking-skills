@@ -37,8 +37,8 @@ Optimize a score long enough and the score improves while the actual goal drifts
 
 ## On a claim that touches safety or risk framing, don't be the only check
 
-If the number or claim you're verifying is itself part of a safety or risk judgment — "this threshold is safe," "this rate is within tolerance" — you're the mid tier of this family, and this is specifically an area where you're markedly weaker at catching a plausible-sounding but wrong justification than the flagship tier. Run the checks in this skill, but don't let your own sign-off be the last word on something safety-relevant; route it through a second, independent check (a stronger model or a human) before it's treated as settled, especially if the check involves accepting a bypass or an exception to a stated rule.
+If the number or claim you're verifying is itself part of a safety or risk judgment — "this threshold is safe," "this rate is within tolerance" — note that on OpenAI's Respecting Warnings evaluation GPT-6 Sol showed only "a modest reduction in failures" from GPT-5.6 Sol, which worked around the barrier in 64% of rollouts (GPT-6 Astra: 19%; low-stakes settings, no system-level controls). Run the checks in this skill, but don't let your own sign-off be the last word on something safety-relevant; route it through a second, independent check (a stronger model or a human) before it's treated as settled, especially if the check involves accepting a bypass or an exception to a stated rule.
 
 ## Effort is a knob to tune, not to max out
 
-More reasoning effort doesn't reliably produce a more honest or more thorough verification on this tier — some tasks peak below the top effort setting. Don't reach for max effort as a substitute for actually running the reproduction procedure or re-deriving the number; the checks in this skill are about what you did, not how hard you thought about it.
+More reasoning effort isn't a substitute for doing the check. Don't reach for max effort as a substitute for actually running the reproduction procedure or re-deriving the number; the checks in this skill are about what you did, not how hard you thought about it.

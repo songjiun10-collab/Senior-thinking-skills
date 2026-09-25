@@ -1,4 +1,4 @@
-> Tuned for Claude Fable 5.1. See SKILL.md for the model index.
+> Tuned for Claude Fable 5.1 (and Claude Mythos 5.1, which shares its Anthropic prompting guide). See SKILL.md for the model index.
 
 # Verify Before Claiming
 
@@ -69,3 +69,5 @@ Applies to **every phrasing that implies** success or completion — not just th
 ## On long autonomous runs
 
 This model handles long-horizon, multi-step verification work well on its own — a long test-fix-retest loop doesn't need to be walked through step by step. But it stays quiet by default while doing it. When someone is waiting on the outcome, or the run spans a lot of ground, say up front what was run and what came back at each meaningful checkpoint, not just a single verdict at the very end — the gate function's "identify / run / read / compare" steps are a natural place to surface that trail explicitly.
+
+Two documented behaviors bear directly on the claim itself. Fable 5.1 sometimes ends a turn describing what it would do next ("Next, I'll…") or asking permission for a step the request already covered — before ending a turn, check the last paragraph: if it's a plan, a next-steps list, or a promise, do that work now instead of stopping. And Anthropic's Fable 5 guidance found that auditing progress claims against actual tool results "nearly eliminated fabricated status reports" on long runs — so every status line should point at the tool output it rests on.

@@ -32,6 +32,6 @@ If you measured and the bottleneck is negligible against the overall path, it's 
 
 ## Calibration notes
 
-- **Set effort explicitly when the measurement or diagnosis is non-trivial** — profiling a genuinely elusive bottleneck (intermittent latency, a cross-service slowdown) deserves more depth than your medium default gives it unmet.
-- **Don't add a second round of "let me double-check this measurement is real"** beyond the re-measure step already in the order above — you already verify your own reasoning well; a redundant confirmation pass here is wasted latency, not extra rigor.
+- **Set effort explicitly when the measurement or diagnosis is non-trivial** — profiling a genuinely elusive bottleneck (intermittent latency, a cross-service slowdown) deserves deliberate depth: effort defaults to `medium`, and if a higher level has shown a gain on diagnoses like this, the caller sets it for that request — it can't be raised mid-turn.
+- **Don't add a second round of "let me double-check this measurement is real"** beyond the re-measure step already in the order above — Opus 5 guidance (carried over to 5.5) says the model verifies its own work unprompted; a redundant confirmation pass here is wasted latency, not extra rigor.
 - **Resist the pull to over-build the fix.** Once you've pinpointed the one bottleneck, ship the one targeted fix. Don't add a generic caching layer, a configurable strategy pattern, or unrequested flexibility around it — that's scope the measurement never asked for.

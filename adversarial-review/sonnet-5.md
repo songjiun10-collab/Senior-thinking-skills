@@ -31,6 +31,8 @@ Any one of these makes it non-trivial:
 4. **Reconcile** — take what comes back and check each point against the actual output text; sort into: real defect / already handled / out of scope.
 5. **Stop condition** — stop once only minor points remain, after three passes, or when the user says it's enough.
 
+**Effort matters here.** Documented for Sonnet 5: it respects effort strictly — at `low` and `medium` it scopes to what was asked, with some risk of under-thinking on moderately complex tasks. A disproof pass on a hard-to-reverse decision is not a low-effort task; if it has to run at `low` for latency, say so and name exactly what to attack. Effort is set by the caller per request (default `high`).
+
 ## Core principles
 
 **Framing decides the answer.** Ask "is this a problem?" and the easy answer is no. Ask "find the problem in this" and one actually gets found. The wording of the review request determines the quality of the review.

@@ -20,7 +20,7 @@ Three failure modes recur:
 - **A suggestion that conflicts with a recorded decision** gets surfaced, not silently applied — either the decision changed (update the record) or it didn't (push back with the reasoning)
 - **External reviewers lack full context** — weigh the suggestion against what the reviewer couldn't see (constraints, decisions, the real goal), and say so when pushing back
 - **Multiple items get prioritized** — blocking first, nits batched; per-item, not one mega-commit mixing everything
-- **Set effort explicitly for anything with real stakes.** Effort defaults to medium, not the deeper setting an irreversible-decision-adjacent review item deserves — a suggestion touching a public API or a recorded architectural decision needs effort raised on purpose, not left at the default
+- **Set effort explicitly for anything with real stakes.** Effort defaults to `medium` (in Anthropic's testing, matching or beating Opus 5 at `high`) — for a suggestion touching a public API or a recorded architectural decision, say so and have the caller run that request higher if it has shown a gain
 - **Principal angle:** how you receive reviews sets the team's culture — pushback with evidence teaches others to push back too; performative agreement teaches them review is theater. The pattern compounds across the team, not just this PR.
 - **Distinguished/Fellow angle:** a review culture where nobody pushes back produces architectural decisions that were never actually debated — the cost shows up years later, in a design that survived because disagreeing was uncomfortable, not because it was right.
 - **Executive angle (CTO/VP-Eng):** review theater consumes review capacity while adding no assurance — a pure cost line. Worth standardizing evidence-based review norms across teams, not leaving it to individual temperament.
@@ -40,8 +40,8 @@ Three failure modes recur:
 | "Pushing back feels rude" | Pushback with evidence is the job; agreement without it is theater |
 | "Apply everything in one commit" | Mixing blocking items and nits makes both harder to verify and revert |
 | "Spin up a subagent to check this" | A direct grep or read usually settles it faster than delegating |
-| "Default effort is fine here" | Medium is the default — raise it explicitly when the item touches something hard to reverse |
+| "Default effort is fine here" | Usually true — but when the item touches something hard to reverse, reproduce the claim first, and flag it so the caller can run it higher |
 
 ## A note on delegation and depth for this model
 
-There's a pull toward handing "check whether this claim holds" to a subagent, even when a direct grep or file read would answer it in the same amount of time delegation setup takes. Default to checking it yourself first. Separately, effort defaults to medium rather than the harder-thinking setting — for a review item that's ambiguous, high-stakes, or touches a recorded decision, set effort up front rather than letting the default pass shallow judgment off as a real evaluation.
+Opus 5 guidance (still applicable to 5.5) documents delegating readily — its recommended prompt explicitly tells the model not to use subagents to double-check its own work — so there's a pull toward handing "check whether this claim holds" to a subagent even when a direct grep or file read would answer it in the time delegation setup takes. Default to checking it yourself first. Separately, effort defaults to `medium` (which in Anthropic's testing matched or beat Opus 5 at `high`); for a review item that's ambiguous, high-stakes, or touches a recorded decision, what prevents shallow judgment is actually reproducing the claim — a higher setting, if it's shown a gain, is the caller's per-request choice.

@@ -7,12 +7,12 @@
 
 Every line you change must connect directly to the request. The moment a reviewer asks "why did this change?", review cost multiplies.
 
-**This skill's "nothing outside the request" rule is a direct counter to a documented tendency of yours — over-engineering, in the form of extra files, unrequested abstractions, and unasked-for flexibility, absent an explicit constraint.** On an edit task that means: don't extract a helper nobody asked for while you're in there, don't add a config parameter to make a one-off change "more general," don't split a file into two because it felt cleaner. Hold the line explicitly rather than trusting it to happen by default. Thinking is always on for you and effort defaults to `medium` — for a real refactor or an edit that spans several files, set effort explicitly so the fence-check and blast-radius audit below actually run instead of being skipped for speed; but don't let extra effort translate into more code than the request needs — effort should buy more checking, not more building.
+**This skill's "nothing outside the request" rule is a direct counter to scope expansion — Opus 5 guidance, which Anthropic says still applies to Opus 5.5, documents adding steps that weren't requested or applying its own judgment about what the task should be.** On an edit task that means: don't extract a helper nobody asked for while you're in there, don't add a config parameter to make a one-off change "more general," don't split a file into two because it felt cleaner. Hold the line explicitly rather than trusting it to happen by default. Thinking is always on for you and effort defaults to `medium` — for a real refactor or an edit that spans several files, run the fence-check and blast-radius audit below as explicit steps rather than counting on a higher setting (which only the caller can change, per request); but don't let extra effort translate into more code than the request needs — effort should buy more checking, not more building.
 
 ## Don't
 
 - Don't touch code, comments, or formatting outside the request's scope
-- Don't "clean up while you're in there" just because something caught your eye — **requested refactoring is welcome, drive-by tidying is not**. This is the one to watch hardest: your default instinct toward "better structure" will produce plausible-sounding tidying that wasn't asked for
+- Don't "clean up while you're in there" just because something caught your eye — **requested refactoring is welcome, drive-by tidying is not**. This is the one to watch hardest: scope expansion here produces plausible-sounding tidying that wasn't asked for
 - Don't refactor what isn't broken
 - Match the existing style even when it's not what you'd choose
 - Before adding a new file as part of an edit, ask whether the request actually called for one — a new file is one of the most common forms unrequested scope takes
@@ -67,7 +67,7 @@ Label findings as required vs. optional. Skip the labels and minor points get tr
 | **Optional:** / **Consider:** | Suggestion — worth thinking about, not required |
 | **FYI** | Informational — no action needed |
 
-**Lead with what matters.** Correctness and security first, structural regressions and missed simplifications next, everything else after. Don't bury one real problem under ten nitpicks — a single structural issue **is** the review. When reviewing your own inclination to add findings, be honest about which ones are "this could be nicer" versus "this is actually wrong" — the former is exactly the kind of scope your default tendency wants to add.
+**Lead with what matters.** Correctness and security first, structural regressions and missed simplifications next, everything else after. Don't bury one real problem under ten nitpicks — a single structural issue **is** the review. When reviewing your own inclination to add findings, be honest about which ones are "this could be nicer" versus "this is actually wrong" — the former is exactly the kind of scope expansion to leave out.
 
 ## Don't accept "I'll clean it up later"
 

@@ -43,6 +43,6 @@ Never make consumers choose between multiple versions of the same dependency or 
 
 ## Calibration notes
 
-- **Set effort explicitly for a real contract review.** Your default effort is `medium`, one step below what a genuinely tricky interface decision (a public API boundary, a cross-team contract) deserves — bump it up when the stakes are that high, since brevity in the response doesn't drop much on its own at lower effort.
-- **Don't over-verify a contract you've already reasoned through carefully.** You self-check well already; re-running the same "does this leak an implementation detail" pass three times over adds latency without catching more.
+- **Effort for a real contract review.** Effort defaults to `medium`, which in Anthropic's testing matched or beat Opus 5 at `high`. For a genuinely tricky interface decision (a public API boundary, a cross-team contract), say so and have the request run higher if that has shown a gain — the caller sets effort per request. Brevity doesn't reliably follow from lower effort (carried over from Opus 5 guidance).
+- **Don't over-verify a contract you've already reasoned through carefully.** Opus 5 guidance (still applicable to 5.5) says added re-check instructions cause over-verification; re-running the same "does this leak an implementation detail" pass three times over adds latency without catching more.
 - **Read the code yourself before reaching for a subagent.** For questions like "what does this endpoint currently return" or "is this field already relied on elsewhere," a direct grep or file read settles it faster than delegating.
