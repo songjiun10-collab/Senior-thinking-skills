@@ -9,7 +9,7 @@ Split along the invocation axis:
 - **user-invoked (router)** — called directly by a person. Its job is orchestration. It can call the model-invoked skills below, but **never calls another router**.
 - **model-invoked (discipline)** — a person can call it too, but the agent also pulls it out on its own when the task calls for it. The reusable disciplines live here.
 
-Each skill's folder is itself split **per model.** `SKILL.md` carries only the frontmatter (name/description — what the harness uses to load the skill) and a short router table; the actual discipline lives in six standalone files tuned to how each model documented-ly behaves — verbosity, self-verification habits, subagent delegation instinct, effort defaults, completion tentativeness:
+Each skill's folder is itself split **per model.** `SKILL.md` carries the frontmatter (name/description — what the harness uses to load the skill) and a short router table; the actual discipline lives in six standalone files tuned to how each model documented-ly behaves — verbosity, self-verification habits, subagent delegation instinct, effort defaults, completion tentativeness. Most `SKILL.md` files are frontmatter + router only; three (`delegate-to-subagents`, `senior-engineer-mindset`, `persistent-memory`) also keep their non-model-dependent shared infrastructure there — hook wiring, a CLI reference — since duplicating that into all six model files would be pure repetition, not tuning:
 
 | Model | File |
 |---|---|
@@ -73,13 +73,13 @@ All three are valid:
 
 ## Design principles
 
-- **29 skills, each split into a thin router plus six per-model files,** beat one 1100-line skill or one file trying to fit every model. Only what's needed loads into context — the harness reads `SKILL.md`'s frontmatter to decide when to fire, then only the one file for the model actually running — and only the unneeded part can be deleted
+- **29 skills, each split into a thin router plus six per-model files,** beat one 1100-line skill or one file trying to fit every model. The harness reads `SKILL.md`'s frontmatter to decide when to fire, then only the one model file that's actually relevant needs reading on top of it — `SKILL.md` itself (frontmatter, router table, and for a few skills some shared non-model-dependent infrastructure) is what loads regardless, not the other five model files — and only the unneeded part can be deleted
 - Each skill's `description` carries **when to fire**. The body carries **what to do**, nothing else
 - Scale-adjustment is the router's job. Writing a design memo for a single function is a failure
 
 ## Related
 
-This bundle is the **thinking** layer — disciplines an agent applies before and while it acts. It doesn't stop a bad action once decided on; the bundled hooks (`delegate-to-subagents`, `senior-engineer-mindset`) are advisory example scripts, not hard enforcement. For the **enforcement** layer — severity-graded PreToolUse/PostToolUse guards that actually deny `rm -rf`, force-push, committing to main, and similar by default — see [songjiun10-collab/hook](https://github.com/songjiun10-collab/hook), a portable extraction of the same hook framework referenced from this bundle's own hook sections. The two are independent and installable separately; each is more useful with the other.
+This bundle is the **thinking** layer — disciplines an agent applies before and while it acts. Its bundled hooks (`delegate-to-subagents`, `senior-engineer-mindset`) are advisory **by default** — an opt-in `*_HOOK_STRICT=1` env var switches a given hook to actually block, but nothing here denies by default, and neither hook is severity-graded or covers more than the one or two mistakes it was written for. For the **enforcement** layer — severity-graded PreToolUse/PostToolUse guards across 8 different risks that deny `rm -rf`, force-push, committing to main, and similar by default, with no opt-in required — see [songjiun10-collab/hook](https://github.com/songjiun10-collab/hook), a portable extraction of the same hook framework referenced from this bundle's own hook sections. The two are independent and installable separately; each is more useful with the other.
 
 ## Sources
 
