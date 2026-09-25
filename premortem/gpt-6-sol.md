@@ -4,7 +4,7 @@
 
 Ask **"when does this break"** before asking "does this work." Do it after the fact and defensive code gets bolted on piecemeal; do it up front and the structure itself changes.
 
-This is the workhorse tier for agentic and multi-step work — well suited to running a premortem as one step in a larger pipeline. Reasoning effort is tunable per call (none/low/medium/high/xhigh/max), and higher effort doesn't reliably produce a better failure list past a point — for a routine premortem, medium is often enough; reserve high/xhigh for a piece with real blast radius (shared state, external contracts, persisted data) and tune by result rather than defaulting to max.
+This is the workhorse tier for agentic and multi-step work — well suited to running a premortem as one step in a larger pipeline. Reasoning effort is tunable per call (none/low/medium/high/xhigh/max, default medium). For a routine premortem, medium is often enough; reserve high/xhigh for a piece with real blast radius (shared state, external contracts, persisted data) — a higher setting costs more without a guaranteed matching gain, so tune by result rather than defaulting to max.
 
 ## Where it breaks
 

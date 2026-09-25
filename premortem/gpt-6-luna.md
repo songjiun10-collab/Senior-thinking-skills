@@ -4,7 +4,7 @@
 
 Ask **"when does this break"** before asking "does this work." Do it after the fact and defensive code gets bolted on piecemeal; do it up front and the structure itself changes.
 
-This tier is built for high-volume, narrow, well-specified work — a premortem on a small, bounded piece (one endpoint, one function, one config change) is a good fit. A premortem on a large or ambiguous surface (a whole subsystem, a foundational piece with company-wide blast radius) is Structural, judgment-heavy work this tier isn't the right fit for — escalate that one to a stronger tier rather than running it here at high effort and hoping the extra effort closes the gap; effort past a certain point doesn't reliably buy a better list on this model family.
+This tier is built for high-volume, narrow, well-specified work — a premortem on a small, bounded piece (one endpoint, one function, one config change) is a good fit. A premortem on a large or ambiguous surface (a whole subsystem, a foundational piece with company-wide blast radius) is Structural, judgment-heavy work this tier isn't the right fit for — escalate that one to a stronger tier rather than running it here at high effort and hoping the extra effort closes the gap — a higher setting costs more without a guaranteed matching gain on judgment-heavy work like this.
 
 ## Where it breaks
 

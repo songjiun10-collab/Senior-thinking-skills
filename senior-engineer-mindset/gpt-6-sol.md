@@ -122,7 +122,7 @@ Only the **format** changes per track:
 - **Bounded** — a 3-5 bullet design note. Pull only the disciplines that actually apply.
 - **Structural** — write it up in the format below, then hand off to `bite-sized-plan`.
 
-With a **1.05M-token context window**, this model can afford to keep the full relevant context loaded — prior decisions in this conversation, related files, the actual repo state — through however deep the router's flow goes, rather than compressing early to save room. Mid-task changes to reasoning effort or the active tool set no longer invalidate the prompt cache, so raising effort for a harder-than-expected leg costs nothing extra in cache terms — but don't default to the highest effort level regardless: on this model, more reasoning effort doesn't reliably buy better results, and some workloads peak below the top setting. Pick effort per task based on what actually improves the outcome, not by habit.
+With a **1.05M-token context window**, this model can afford to keep the full relevant context loaded — prior decisions in this conversation, related files, the actual repo state — through however deep the router's flow goes, rather than compressing early to save room. Mid-task changes to reasoning effort or the active tool set no longer invalidate the prompt cache, so raising effort for a harder-than-expected leg costs nothing extra in cache terms — but don't default to the highest effort level regardless: a higher setting costs more without a guaranteed matching gain, so measure it against your own workload rather than maxing out by habit. Pick effort per task based on what actually improves the outcome, not by habit.
 
 ## Output format (medium-to-large tasks)
 
