@@ -18,6 +18,15 @@ Occasionally a task handed to you is itself a small fan-out of equally narrow, w
 
 Outside that shape, if you're asked to design a delegation plan, arbitrate between subagents, or judge whether a blocked report needs escalation, escalate the decision itself rather than making the call — say plainly that this is a judgment call better suited to a stronger model or a human, and hand back what you found.
 
+**If you do dispatch a flat fan-out, the mechanics still apply even at this narrow scale — this tier doesn't get a lighter version of them:**
+
+- **Never let two of your dispatched legs edit the same file.** Even 40 narrow tickets can collide if two land in the same file; check for overlap before dispatching, not after.
+- **Scope each worker's permissions to what its leg actually needs** — a routing/classification leg doesn't need write access to anything it isn't updating.
+- **Record a baseline right before dispatching** (e.g. `git rev-parse HEAD`, or a snapshot of the state each leg will modify) so you have something to diff against afterward.
+- **A worker's "done" report is a claim, not evidence.** Spot-check a sample of the returned results against the actual state before rolling all 40 up into your own summary — the same rule this skill applies to any subagent's report applies to yours as a coordinator too.
+
+If any of this feels like more structure than the task needs, that's a signal the fan-out wasn't as narrow as it looked — hand it to a stronger controller instead of skipping the checklist.
+
 ## As a worker: what a good brief looks like, and what to do if you don't get one
 
 Since you'll usually be on the receiving end of a dispatch rather than the one sending it, the most useful thing this skill can do for you is describe what a well-formed brief looks like, so you can flag it when yours isn't one:

@@ -89,9 +89,10 @@ Beyond a live dispatch or a continued conversation, some environments can fire a
 ## Give long-running work a name and a status line
 
 - When a delegated agent runs over a longer stretch, don't leave it silent until it finishes — give it a short name and keep a one-line status that updates as it progresses ("Inbox Manager — sent, inbox at zero, 5 drafts parked"). A glanceable roster beats a wall of silence followed by one huge report at the end.
-- **There's no live channel for this** — a dispatched agent returns one final result, not a stream of intermediate updates you can watch. The only way to get a status line that actually updates mid-run is to brief the agent to write its own progress to a file (e.g. `.claude/status/<name>.md`) and glance at that file yourself — say this explicitly in the brief, since a worker won't infer that a status file is wanted just from the task itself.
+- **Prefer a live channel where one exists.** If your environment supports addressing a named, already-running agent directly (see "Talking to an agent that's already running" above), that's the actual status line — message it, or check in on it, instead of only waiting for a final report.
+- **In a one-shot dispatch environment** (no live addressing, no subscribe-to-completion — just brief in, wait, get one final result back), there's no live channel to fall back on. There, the only way to get something that updates mid-run is to brief the agent to write its own progress to a file (e.g. `.claude/status/<name>.md`) and glance at that file yourself — say this explicitly in the brief, since a worker won't infer that a status file is wanted just from the task itself.
 - This is for genuinely long-running or ongoing delegations, not a two-minute task — for a short dispatch, just wait for the completion signal.
-- Mid-run changes to reasoning effort or tool set no longer force a fresh, uncached context — so if a long-running worker turns out to need more or less depth than briefed, adjusting it partway through is cheap now, not a reason to re-dispatch from scratch.
+- If a long-running worker turns out to need more or less depth than it was briefed at, that's not something to adjust mid-run from the outside — its effort was set when its request started. Flag it in the status channel and re-brief or re-dispatch at the right depth for what's left; a mid-conversation effort change no longer forces a fresh, uncached context, so that re-dispatch isn't the costly reset it used to be.
 
 ## Reasoning effort: tune it, don't max it
 
