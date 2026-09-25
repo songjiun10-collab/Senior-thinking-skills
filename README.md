@@ -66,7 +66,7 @@ All three are valid:
 
 ## Sources
 
-This bundle pulled ideas from fourteen places and reconstructed them.
+This bundle pulled ideas from fifteen places and reconstructed them.
 
 | Source | Link | What was taken |
 |---|---|---|
