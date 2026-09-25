@@ -18,7 +18,7 @@ The gap between junior and senior isn't "how well you write code" — it's **wha
 
 Read the file matching the model actually running before applying this skill. Each file is a complete, standalone rewrite covering the four-lens framing, the sub-skill and situational-pick tables, track classification, the "too simple to need a check" trap, output format, and the skip list — calibrated for that model. The hook below is not model-dependent and applies the same way regardless of which file you read.
 
-**Running a model not listed above** (Claude Haiku 4.5, Claude Opus 5, an older generation, a different model family entirely)? `sonnet-5.md` carries the fullest general-purpose version of the underlying procedure — read that one rather than skipping this skill.
+**Running a model not listed above** (Claude Haiku 4.5, Claude Opus 5, an older generation, a different model family entirely)? `sonnet-5.md` carries the fullest general-purpose version of the underlying procedure — read that one rather than skipping this skill. Haiku 4.5 has no `effort` parameter and a 200K context window (not 1M): apply the discipline, but skip that file's effort-level and context-window specifics — they don't hold for Haiku.
 
 ## Optional: enforce with a hook
 

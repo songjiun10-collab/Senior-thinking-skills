@@ -48,6 +48,7 @@ Documented for Opus 5.5 itself (A-O55):
 - Resists indirect prompt injection better than any earlier Opus; pasted text should be marked.
 - Strongest on multistep repository work and code review ("more bugs caught … fewer false alarms"); sustains long autonomous work with parallel subagents.
 - `reasoning_extraction` refusal category: prompts that push it to reproduce internal reasoning in the response can be declined.
+- Runs safety classifiers for biology, cybersecurity, and reasoning extraction; a decline arrives as a normal response with `stop_reason: "refusal"`. Cybersecurity: "Finding vulnerabilities in source code is allowed. High-risk dual-use cybersecurity activities are not." Biology classifiers are the same as Fable 5.1's and are new relative to Opus 5.
 
 ## Claude Opus 5 (inheritable by Opus 5.5, see above)
 
