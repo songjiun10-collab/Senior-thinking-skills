@@ -32,6 +32,7 @@ progress.md    → session log and test results
 ## Completion is a gate, not a feeling
 
 - No "done" while a checkbox stands unchecked or a phase is `in_progress` — `verify-before-claiming` applies to the plan itself, not just the code. State this as the literal completion criterion for the run, since the pull otherwise is to stay cautious about declaring a phase finished rather than checking it against the boxes and moving on.
+- **A checked box has to stay checked.** A user report ([openai/codex#46700](https://github.com/openai/codex/issues/46700), one instance, not a documented rate) describes a long unattended run at high effort that repeatedly reverted and rewrote its own earlier changes — "completed phases were never treated as done" — while writing close to 1TB to `/tmp` over a full day without finishing the plan. Re-read `task_plan.md` before revisiting a phase already checked off; reopening one is a decision to log, not something to slide into while chasing a later phase.
 - The plan files are **working memory, not a deliverable**: gitignored by default, overwritten by the next task. Anything worth keeping gets promoted into code, a commit, or a doc.
 - Corrections and preferences belong in `persistent-memory` (durable per-topic files); execution state belongs here. Don't mix them.
 
