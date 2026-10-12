@@ -1,10 +1,10 @@
-> Tuned for OpenAI GPT-6.1 Sol. Behavioral notes carried over from GPT-6 Sol and not yet verified against 6.1. See SKILL.md for the model index.
+> Tuned for OpenAI GPT-6.1 Sol. Source: OpenAI developer docs (Using GPT-6, GPT-6.1 Sol section). Sol-specific prompting guidance is not published separately; GPT-6 family prompting guidance applies with the caveat that it was written from Astra behavior. See SKILL.md for the model index.
 
 # Premortem
 
 Ask **"when does this break"** before asking "does this work." Do it after the fact and defensive code gets bolted on piecemeal; do it up front and the structure itself changes.
 
-This is the workhorse tier for agentic and multi-step work — well suited to running a premortem as one step in a larger pipeline. Reasoning effort is tunable per call (none/low/medium/high/xhigh/max), and higher effort doesn't reliably produce a better failure list past a point — for a routine premortem, medium is often enough; reserve high/xhigh for a piece with real blast radius (shared state, external contracts, persisted data) and tune by result rather than defaulting to max.
+This is the workhorse tier for agentic and multi-step work — well suited to running a premortem as one step in a larger pipeline. Reasoning effort is tunable per call (low/medium/high/xhigh/max; `none` and `minimal` are not supported on Sol, and the default is medium), and higher effort doesn't reliably produce a better failure list past a point — for a routine premortem, medium is often enough; reserve high/xhigh for a piece with real blast radius (shared state, external contracts, persisted data) and tune by result rather than defaulting to max.
 
 ## Where it breaks
 

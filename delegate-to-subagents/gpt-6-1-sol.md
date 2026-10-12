@@ -1,4 +1,4 @@
-> Tuned for OpenAI GPT-6.1 Sol. Behavioral notes carried over from GPT-6 Sol and not yet verified against 6.1. See SKILL.md for the model index.
+> Tuned for OpenAI GPT-6.1 Sol. Source: OpenAI developer docs (Using GPT-6, GPT-6.1 Sol section). Sol-specific prompting guidance is not published separately; GPT-6 family prompting guidance applies with the caveat that it was written from Astra behavior. See SKILL.md for the model index.
 
 # Delegating to Subagents
 
@@ -96,7 +96,7 @@ Beyond a live dispatch or a continued conversation, some environments can fire a
 
 ## Reasoning effort: tune it, don't max it
 
-Effort doesn't reliably improve results as you raise it on this tier — benchmarks show it peaking below the top setting on some tasks, and low/none-effort options exist for latency-sensitive dispatches. Set the worker's effort per subtask empirically rather than defaulting every dispatch to the highest setting "to be safe" — a narrow, well-specified leg often does just as well at a lower effort and finishes faster; a genuinely ambiguous leg deserves the tuning, not just the top slider position by default.
+Effort doesn't reliably improve results as you raise it on this tier — benchmarks show it peaking below the top setting on some tasks, and low is the lowest effort Sol supports (`none` is not supported), so use it for latency-sensitive dispatches. Set the worker's effort per subtask empirically rather than defaulting every dispatch to the highest setting "to be safe" — a narrow, well-specified leg often does just as well at a lower effort and finishes faster; a genuinely ambiguous leg deserves the tuning, not just the top slider position by default.
 
 ## Common failures
 

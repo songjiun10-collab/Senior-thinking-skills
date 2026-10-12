@@ -1,4 +1,4 @@
-> Tuned for OpenAI GPT-6.1 Sol. Behavioral notes carried over from GPT-6 Sol and not yet verified against 6.1. See SKILL.md for the model index.
+> Tuned for OpenAI GPT-6.1 Sol. Source: OpenAI developer docs (Using GPT-6, GPT-6.1 Sol section). Sol-specific prompting guidance is not published separately; GPT-6 family prompting guidance applies with the caveat that it was written from Astra behavior. See SKILL.md for the model index.
 
 # Complexity budget
 

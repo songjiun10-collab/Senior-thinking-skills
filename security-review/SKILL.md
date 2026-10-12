@@ -12,6 +12,8 @@ This skill is tuned per model. The OWASP checklist itself doesn't change; the pr
 | Claude Opus 5.5 | `opus-5-5.md` |
 | Claude Fable 5.1 | `fable-5-1.md` |
 | Claude Sonnet 5 | `sonnet-5.md` |
+| Claude Sonnet 5.5 | `sonnet-5-5.md` |
+| Claude Haiku 5.5 | `haiku-5-5.md` |
 | OpenAI GPT-6 Astra | `gpt-6-astra.md` |
 | OpenAI GPT-6 Sol | `gpt-6-sol.md` |
 | OpenAI GPT-6.1 Sol | `gpt-6-1-sol.md` |
