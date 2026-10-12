@@ -1,4 +1,4 @@
-> Tuned for OpenAI GPT-6.1 Sol. See SKILL.md for the model index.
+> Tuned for OpenAI GPT-6 Sol. See SKILL.md for the model index.
 
 # Review With Fresh Eyes
 

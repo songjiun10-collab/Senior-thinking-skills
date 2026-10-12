@@ -15,7 +15,8 @@ This skill is tuned per model. Pick the file matching the model actually running
 | Claude Fable 5.1 | `fable-5-1.md` |
 | Claude Sonnet 5 | `sonnet-5.md` |
 | OpenAI GPT-6 Astra | `gpt-6-astra.md` |
-| OpenAI GPT-6.1 Sol | `gpt-6-sol.md` |
+| OpenAI GPT-6 Sol | `gpt-6-sol.md` |
+| OpenAI GPT-6.1 Sol | `gpt-6-1-sol.md` |
 | OpenAI GPT-6 Luna | `gpt-6-luna.md` |
 
 Read the file matching the model currently running before applying this skill.
