@@ -13,8 +13,11 @@ This skill's substantive guidance (deciding whether to delegate, briefing, coord
 | Claude Opus 5.5 | `opus-5-5.md` |
 | Claude Fable 5.1 | `fable-5-1.md` |
 | Claude Sonnet 5 | `sonnet-5.md` |
+| Claude Sonnet 5.5 | `sonnet-5-5.md` |
+| Claude Haiku 5.5 | `haiku-5-5.md` |
 | OpenAI GPT-6 Astra | `gpt-6-astra.md` |
 | OpenAI GPT-6 Sol | `gpt-6-sol.md` |
+| OpenAI GPT-6.1 Sol | `gpt-6-1-sol.md` |
 | OpenAI GPT-6 Luna | `gpt-6-luna.md` |
 
 Read whichever file matches the model actually running before applying this skill.
@@ -52,7 +55,7 @@ Add to `.claude/settings.json`:
 }
 ```
 
-`Agent` is the built-in dispatch tool's name (some docs/blogs from older Claude Code versions still say `Task` — if your version predates the rename, use that instead and confirm against your own `tool_name` in a hook payload). Hook the same script into both PreToolUse and PostToolUse — PostToolUse closes out the specific dispatch that finished, keyed by the call's `tool_use_id` (hook only one side and open dispatches never get closed). If your skill is installed at a different path, update the command path to match. By default it only warns quietly (visible only in the human-facing transcript) — to make Claude actually react to it (i.e. actually block), prefix the command with `DELEGATE_HOOK_STRICT=1` (`"command": "DELEGATE_HOOK_STRICT=1 python3 ..."`). This hook is example-level enforcement — not a red-team-tested CRITICAL-tier block like Hncs's `protect_never_touch.py`, just a minimal mechanization of this skill's verbal advice. If you need something stronger, use this script as a starting point and adapt it to your project.
+`Agent` is the built-in dispatch tool's name (some docs/blogs from older Claude Code versions still say `Task` — if your version predates the rename, use that instead and confirm against your own `tool_name` in a hook payload). Hook the same script into both PreToolUse and PostToolUse — PostToolUse closes out the specific dispatch that finished, keyed by the call's `tool_use_id` (hook only one side and open dispatches never get closed). If your skill is installed at a different path, update the command path to match. By default it only warns quietly (visible only in the human-facing transcript) — to make Claude actually react to it (i.e. actually block), prefix the command with `DELEGATE_HOOK_STRICT=1` (`"command": "DELEGATE_HOOK_STRICT=1 python3 ..."`). This hook is example-level enforcement — not a red-team-tested CRITICAL-tier block. For that tier (severity-graded PreToolUse/PostToolUse guards that actually deny `rm -rf`, force-push, committing to main, etc., by default rather than just warning), see [songjiun10-collab/hook](https://github.com/songjiun10-collab/hook) — a portable extraction of the same hook framework this line used to point at internally. That plugin covers hard enforcement; this bundle covers the thinking that should prevent the situation from reaching a hook in the first place. If you need something stronger than this example script but lighter than that plugin, use this script as a starting point and adapt it to your project.
 
 **Limitation:** the hook only counts *how many* dispatches are open, it doesn't know *which files* each one touches — two parallel dispatches editing the same file won't trip anything as long as the total count stays under the threshold. Catching that mechanically would mean parsing each brief for the files it intends to touch and cross-checking against the others' — out of scope for this example script; "never let two dispatches edit the same live file" stays something you enforce by reading the briefs yourself.
 

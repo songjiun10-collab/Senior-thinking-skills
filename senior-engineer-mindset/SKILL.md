@@ -12,8 +12,11 @@ The gap between junior and senior isn't "how well you write code" — it's **wha
 | Claude Opus 5.5 | `opus-5-5.md` |
 | Claude Fable 5.1 | `fable-5-1.md` |
 | Claude Sonnet 5 | `sonnet-5.md` |
+| Claude Sonnet 5.5 | `sonnet-5-5.md` |
+| Claude Haiku 5.5 | `haiku-5-5.md` |
 | OpenAI GPT-6 Astra | `gpt-6-astra.md` |
 | OpenAI GPT-6 Sol | `gpt-6-sol.md` |
+| OpenAI GPT-6.1 Sol | `gpt-6-1-sol.md` |
 | OpenAI GPT-6 Luna | `gpt-6-luna.md` |
 
 Read the file matching the model actually running before applying this skill. Each file is a complete, standalone rewrite covering the four-lens framing, the sub-skill and situational-pick tables, track classification, the "too simple to need a check" trap, output format, and the skip list — calibrated for that model. The hook below is not model-dependent and applies the same way regardless of which file you read.
@@ -49,4 +52,4 @@ Add to `.claude/settings.json`:
 }
 ```
 
-If your skill is installed at a different path, update the command path to match. This is a path-based heuristic, not a real understanding of what's actually hard to reverse — it can't tell a real schema change from an unrelated edit to a file that happens to live in `migrations/`, and it can't tell a dependency version bump from a comment-only edit to a manifest file. A false positive just costs a wasted nudge (advisory by default); it isn't a substitute for actually judging whether a decision is hard to reverse. Same example-level-enforcement framing as `delegate-to-subagents`'s bundled hook — not a red-team-tested CRITICAL-tier block.
+If your skill is installed at a different path, update the command path to match. This is a path-based heuristic, not a real understanding of what's actually hard to reverse — it can't tell a real schema change from an unrelated edit to a file that happens to live in `migrations/`, and it can't tell a dependency version bump from a comment-only edit to a manifest file. A false positive just costs a wasted nudge (advisory by default); it isn't a substitute for actually judging whether a decision is hard to reverse. Same example-level-enforcement framing as `delegate-to-subagents`'s bundled hook — not a red-team-tested CRITICAL-tier block. See `delegate-to-subagents`'s hook section for the plugin that does provide that tier ([songjiun10-collab/hook](https://github.com/songjiun10-collab/hook)).
