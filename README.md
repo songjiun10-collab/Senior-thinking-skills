@@ -17,7 +17,7 @@ Each skill's folder is itself split **per model.** `SKILL.md` carries the frontm
 | Claude Fable 5.1 | `fable-5-1.md` |
 | Claude Sonnet 5 | `sonnet-5.md` |
 | OpenAI GPT-6 Astra | `gpt-6-astra.md` |
-| OpenAI GPT-6 Sol | `gpt-6-sol.md` |
+| OpenAI GPT-6.1 Sol | `gpt-6-sol.md` |
 | OpenAI GPT-6 Luna | `gpt-6-luna.md` |
 
 Read the file matching whichever model is actually running before applying a skill. On an unlisted model (Haiku, an older generation, a different family entirely), `sonnet-5.md` carries the fullest general-purpose version of the underlying procedure. Grounded in Anthropic's own [model-specific prompting guidance](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#model-specific-guidance) and OpenAI's [GPT-6 Astra migration guidance](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra) — re-check both when a new model ships, since these are per-generation behavioral notes, not fixed properties of a brand name.

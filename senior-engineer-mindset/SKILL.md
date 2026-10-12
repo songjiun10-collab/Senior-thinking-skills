@@ -13,7 +13,7 @@ The gap between junior and senior isn't "how well you write code" — it's **wha
 | Claude Fable 5.1 | `fable-5-1.md` |
 | Claude Sonnet 5 | `sonnet-5.md` |
 | OpenAI GPT-6 Astra | `gpt-6-astra.md` |
-| OpenAI GPT-6 Sol | `gpt-6-sol.md` |
+| OpenAI GPT-6.1 Sol | `gpt-6-sol.md` |
 | OpenAI GPT-6 Luna | `gpt-6-luna.md` |
 
 Read the file matching the model actually running before applying this skill. Each file is a complete, standalone rewrite covering the four-lens framing, the sub-skill and situational-pick tables, track classification, the "too simple to need a check" trap, output format, and the skip list — calibrated for that model. The hook below is not model-dependent and applies the same way regardless of which file you read.
