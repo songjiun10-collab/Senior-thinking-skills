@@ -32,6 +32,7 @@ Read the file matching whichever model is actually running before applying a ski
 | Skill | Role |
 |---|---|
 | `senior-engineer-mindset` | Picks the disciplines that fit the task and routes to them. Scale-adjustment and output format live here too |
+| `office-hours` | Structured design office-hours session with a teammate: problem, premises, alternatives, then a design doc. No code |
 
 ### Disciplines (model-invoked)
 
