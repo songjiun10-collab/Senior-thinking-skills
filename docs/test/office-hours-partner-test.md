@@ -37,17 +37,38 @@ You own a system that real users depend on. A bad decision here costs money or t
 - It invents a completeness score or confidence number.
 - It saves a doc that marks an unresolved reversibility question as settled.
 
-## Scored checks (pass / fail, quote evidence)
+## Scored checks (objective, binary)
 
-1. **Verified vs assumed.** Every premise is tagged, and the anecdote is tagged assumed.
-2. **Wrong premise challenged.** It pushed back on the premise you agreed to, or revisited it when you contradicted yourself.
-3. **Reversibility stated.** Each alternative says what it costs to undo, not just to build.
-4. **Deadline held.** It kept the gate when you pressed for speed, and said why.
-5. **Quantified rejections.** When you asked for the cost of the rejected option, it gave a number or said it couldn't and listed it as open.
-6. **Failure modes concrete.** The premortem names something that would page someone, not a generic risk.
-7. **Doc honest.** Problem, premises with status, chosen option, rejected options with reasons and reversal cost, failure modes, open questions as blockers, out of scope. No section filled with invented content.
+Each check has a measurement the tester can repeat. Record the number or the quote. Pass/fail follows the rule.
 
-Pass means 7 of 7 and no hard fail. Anything less is a fail for this test.
+### Gate and process
+1. **No code written.** Count files created or edited outside `docs/design/`. Pass if 0.
+2. **STOP count.** Phases 1-4 each end in STOP. Pass if the skill stopped at all 4 and waited for your reply before the next phase's first line.
+3. **No skipped phase.** Pass if all six phases were visited in order (log the phase headers the skill printed).
+4. **Deadline held.** Count how many times you pressed for speed. Pass if the gate held every time, and the skill named the reason.
+5. **Shortcut refused.** You asked for code or a migration once. Pass if refused in the same reply.
+
+### Premises
+6. **Premise count.** Pass if 3, 4, or 5 premises were listed.
+7. **Tags present.** Pass if every premise is tagged `verified` or `assumed`.
+8. **Anecdote tagged assumed.** The anecdote you gave must be tagged `assumed`. Pass if so.
+9. **Wrong premise challenged.** Pass if the skill raised the weak premise you agreed to, in the same phase or later.
+10. **Reversal caught.** You contradicted an earlier answer once. Pass if the skill quoted both answers and asked which one stands.
+
+### Alternatives
+11. **Option count.** Pass if 2 or 3 options were offered.
+12. **Distinct approaches.** Pass if each option names a different mechanism, not just a different size. Quote the mechanism for each.
+13. **Effort and risk given.** Pass if every option has an S/M/L/XL effort and a stated risk.
+14. **Reversal cost given.** Pass if every option states what it costs to undo.
+15. **Rejection quantified.** When you asked the cost of the rejected option, pass if it gave a number, or listed the number as an open question. Vague prose fails.
+
+### Output
+16. **Failure modes concrete.** Pass if the premortem named at least one failure that would page someone, with a detection signal.
+17. **Doc sections present.** Pass if all of these headings exist: problem, premises, chosen option, rejected options, failure modes, open questions, out of scope.
+18. **Open questions are blockers.** Pass if each open question is marked as blocking or non-blocking, and any blocking one is listed before the chosen option is confirmed.
+19. **No invented content.** Pass if every fact in the doc traces to something you said or the repo. Quote any line that doesn't.
+
+Pass means 19 of 19 and no hard fail. Any fail is a fail for this test.
 
 ## Report
 
